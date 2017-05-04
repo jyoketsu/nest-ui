@@ -1,0 +1,386 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nest UI</title>
+    <!-- 引入bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <!-- 引入awesome图标 -->
+    <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+    <!-- 引入jquery-ui -->
+    <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
+    <script src="../../jquery-ui/jquery-ui.js"></script>
+    <!-- 引入bootstrap-table -->
+    <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+    <script src="../../bootstrap-table/bootstrap-table.js"></script>
+    <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <!-- 引入treeview插件 -->
+    <script src="../../js/bootstrap-treeview.js"></script>
+    <!-- 引入自定义 -->
+    <link rel="stylesheet" href="../../style/main.css">
+    <script src="../../js/nest/main.js"></script>
+    <script src="../../data/step3TreeData.js"></script>
+
+    <script>
+        function getTree() {
+            var treeData = getTreeData();
+            return treeData;
+        }
+
+        function setTreeContainerHeight() {
+            var btnGroupHeight = $('#btnToolbar').height();
+            var treeContainerHeight = $('#treeContainer').parent().height();
+            $('#treeContainer').height(treeContainerHeight-btnGroupHeight);
+        }
+
+        $(document).ready(function(){
+            // 单击退出按钮
+            $("#quit").on("click",function(){
+                window.location.href = "../product-detect/product-detect.html";
+            });
+            // 单击上一步按钮
+            $("#prevStep").on("click",function(){
+                window.location.href = "./build-model-step2.html";
+            });
+            // 单击下一步按钮
+            $("#nextStep").on("click",function(){
+                window.location.href = "../product-detect/product-detect.html";
+            });
+
+            $('#tree').treeview({data: getTree()});
+
+            setTreeContainerHeight();
+
+            $('#collapse').on("click",function(){
+                if($('#tree').treeview('getNode', 0).state.expanded){
+                    $('#tree').treeview('collapseAll');
+                    $('#collapse').find("i").attr("class","fa fa-plus");
+                } else {
+                    $('#tree').treeview('expandAll');
+                    $('#collapse').find("i").attr("class","fa fa-minus");
+                }
+            });
+
+            $('#tree').on('nodeSelected', function(event, data) {
+                if(data.nodeType == "image"){
+                    $("#groupToolbar").css("display","none");
+                    $("#imageToolbar").css("display","block");
+                } else if(data.nodeType == "group"){
+                    $("#imageToolbar").css("display","none");
+                    $("#groupToolbar").css("display","block");
+                } else {
+                    $("#imageToolbar").css("display","none");
+                    $("#groupToolbar").css("display","none");
+                }
+                console.log(data);
+            });
+        });
+
+        $(window).resize(function () {
+            setTreeContainerHeight();
+        });
+
+        // 工具提示
+        $(function () {
+            $('.btnTooltip').tooltip();
+        })
+    </script>
+</head>
+<body>
+    <!-- tab菜单 -->
+    <div class="nestTabMenu">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"><a href="#" style="width: 250px;height: 42px;margin-left: 10px; background: url(../../style/focusight.png) no-repeat;background-size: contain"></a></li>
+            <li role="presentation" class="active"><a href="#system" aria-controls="system" role="tab" data-toggle="tab"><i class="fa fa-gears" aria-hidden="true"></i> 系统</a></li>
+            <li role="presentation"><a href="#object" aria-controls="object" role="tab" data-toggle="tab"><i class="fa fa-check-square-o" aria-hidden="true"></i> 对象</a></li>
+            <li role="presentation"><a href="#auto" aria-controls="auto" role="tab" data-toggle="tab"><i class="fa fa-automobile" aria-hidden="true"></i> 自动</a></li>
+            <li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab"><i class="fa fa-image" aria-hidden="true"></i> 视图</a></li>
+        </ul>
+        <!-- 标签面板 -->
+        <div class="tab-content nestTabContent">
+            <div role="tabpanel" class="tab-pane fade in active" id="system">
+                <!-- tab菜单导航条 -->
+                <nav class="navbar navbar-default nestTabNavbar">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">操作</a></li>
+                                <li><a href="#"><i class="fa fa-save" aria-hidden="true"></i>保存</a></li>
+                                <li><a href="#"><i class="fa fa-clone" aria-hidden="true"></i>另存为</a></li>
+                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i>删除模板</a></li>
+                                <li><a href="#" id="quit"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="object">
+                <!-- tab菜单导航条 -->
+                <nav class="navbar navbar-default nestTabNavbar">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">操作</a></li>
+                                <li><a href="#"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 选择</a></li>
+                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">检测范围</a></li>
+                                <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 检测范围</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">层次</a></li>
+                                <li><a href="#"><i class="fa fa-long-arrow-down" aria-hidden="true"></i> 至于底层</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="auto">
+                <!-- tab菜单导航条 -->
+                <nav class="navbar navbar-default nestTabNavbar">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">自动功能</a></li>
+                                <li><a href="#"><i class="fa fa-photo" aria-hidden="true"></i> 背景检测区</a></li>
+                                <li><a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i> 前景检测区</a></li>
+                                <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 定位核</a></li>
+                                <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> 参数设置</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">可变信息</a></li>
+                                <li><a href="#"><i class="fa fa-barcode" aria-hidden="true"></i> 一维码</a></li>
+                                <li><a href="#"><i class="fa fa-barcode" aria-hidden="true"></i> 一维字符码</a></li>
+                                <li><a href="#"><i class="fa fa-qrcode" aria-hidden="true"></i> 二维码</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">区域</a></li>
+                                <li><a href="#"><i class="fa fa-compress" aria-hidden="true"></i> 腐蚀</a></li>
+                                <li><a href="#"><i class="fa fa-expand" aria-hidden="true"></i> 膨胀</a></li>
+                                <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> 参数设置</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="view">
+                <!-- tab菜单导航条 -->
+                <nav class="navbar navbar-default nestTabNavbar">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="navbar-collapse-4">
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">适应</a></li>
+                                <li><a href="#"><i class="fa fa-image" aria-hidden="true"></i> 原始图像</a></li>
+                                <li><a href="#"><i class="fa fa-arrows-h" aria-hidden="true"></i> 适应宽度</a></li>
+                                <li><a href="#"><i class="fa fa-arrows-v" aria-hidden="true"></i> 适应高度</a></li>
+                                <li><a href="#"><i class="fa fa-arrows-alt" aria-hidden="true"></i> 适应窗口</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">缩放</a></li>
+                                <li><a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i> 放大</a></li>
+                                <li><a href="#"><i class="fa fa-search-minus" aria-hidden="true"></i> 缩小</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">元素</a></li>
+                                <li><a href="#"><i class="fa fa-square" aria-hidden="true"></i> 显示掩膜</a></li>
+                                <li><a href="#"><i class="fa fa-square-o" aria-hidden="true"></i> 动态边框</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!--主体内容-->
+    <div style="position: fixed; top: 100px;left: 0;right: 0;bottom: 50px;">
+        <div class="container-fluid" style="height: 100%">
+            <div class="row" style="height: 100%">
+                <div class="col-md-2 nestCol" style="height: 100%;">
+
+                    <div class="btn-toolbar" role="toolbar" aria-label="..." id="btnToolbar">
+                        <div class="btn-group btn-group-sm nest-btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default" id="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                        <div class="btn-group btn-group-sm nest-btn-group" role="group" id="imageToolbar" style="display: none">
+                            <button type="button" class="btn btn-info btnTooltip" title="增加分组"><i class="fa fa-plus-square"></i></button>
+                            <button type="button" class="btn btn-info btnTooltip" title="显示全部"><i class="fa fa-check-square-o"></i></button>
+                        </div>
+                        <div class="btn-group btn-group-sm nest-btn-group" role="group" id="groupToolbar" style="display: none">
+                            <button type="button" class="btn btn-info btnTooltip" title="增加对象"><i class="fa fa-plus-square"></i></button>
+                            <button type="button" class="btn btn-danger btnTooltip" title="删除分组"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+
+                    <div id="treeContainer" style="overflow: auto;">
+                        <div id="tree" style="width: 215px"></div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-7 nestCol" style="height: 100%;">
+                    <div id="canvas" style="height: 100%;background-color: #0f0f0f;">
+                        <p style="color: white">绘图组件</p>
+                    </div>
+                </div>
+                <div class="col-md-3 nestCol" style="height: 100%;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">对象#1</h3>
+                        </div>
+                        <div class="panel-body" style="padding: 5px">
+                            <form class="form-horizontal" style="padding: 5px">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <select class="form-control">
+                                            <option value="1">转正</option>
+                                            <option value="1">区域定位</option>
+                                            <option value="1" selected>比对检测</option>
+                                            <option value="1">条码检测</option>
+                                            <option value="1">字符检测</option>
+                                            <option value="1">二维码识读</option>
+                                            <option value="1">低对比度检测</option>
+                                            <option value="1">偏位检测</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">区域定位</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs smallTab" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本参数</a></li>
+                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">高级参数</a></li>
+                                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">仿真参数</a></li>
+                                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">仿真</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content smallTabContent">
+                                        <div role="tabpanel" class="tab-pane active" id="home">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" value="option1" checked>
+                                                    是否保存缺陷小图
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" value="option1" checked>
+                                                    是否进行条码识读
+                                                </label>
+                                            </div>
+                                            <div class="radio" style="padding-bottom: 7px">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" value="option1" checked>
+                                                    是否进行条码缺陷检测
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">条码类型</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control">
+                                                        <option>Code 128</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label">条码元素最大尺寸</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" value="50">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label">白空区域提取阈值</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" value="40">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label">黑条区域提取阈值</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" value="40">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                                        <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                                        <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom nestStepChangeBar">
+        <div class="container-fluid">
+            <div class="navbar-form">
+                <button class="btn btn-default nestStepChangeBarLeftButton" id="prevStep"><i class="fa fa-chevron-left"></i> 上一步</button>
+                <button class="btn btn-default nestStepChangeBarRightButton" id="nextStep">完成 <i class="fa fa-circle-o"></i></button>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

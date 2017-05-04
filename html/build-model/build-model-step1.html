@@ -1,0 +1,130 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nest UI</title>
+    <!-- 引入bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <!-- 引入awesome图标 -->
+    <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+    <!-- 引入jquery-ui -->
+    <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
+    <script src="../../jquery-ui/jquery-ui.js"></script>
+    <!-- 引入bootstrap-table -->
+    <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+    <script src="../../bootstrap-table/bootstrap-table.js"></script>
+    <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <!-- 引入自定义 -->
+    <link rel="stylesheet" href="../../style/main.css">
+    <script src="../../js/nest/main.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            // 单击退出按钮
+            $("#quit").on("click",function(){
+                window.location.href = "../product-detect/product-detect.html";
+            });
+            // 使上一步无效
+            $("#prevStep").attr("disabled",true);
+            // 单击下一步按钮
+            $("#nextStep").on("click",function(){
+                window.location.href = "./build-model-step2.html";
+            });
+        });
+    </script>
+</head>
+<body style="background-color: #f5f8fa">
+    <!-- tab菜单 -->
+    <div class="nestTabMenu">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"><a href="#" style="width: 250px;height: 42px;margin-left: 10px; background: url(../../style/focusight.png) no-repeat;background-size: contain"></a></li>
+            <li role="presentation" class="active"><a href="#system" aria-controls="station1" role="tab" data-toggle="tab"><i class="fa fa-gears" aria-hidden="true"></i> 系统</a></li>
+        </ul>
+        <!-- 标签面板 -->
+        <div class="tab-content nestTabContent">
+            <div role="tabpanel" class="tab-pane fade in active" id="system">
+                <!-- tab菜单导航条 -->
+                <nav class="navbar navbar-default nestTabNavbar">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav nestNavbarUl">
+                                <li><a href="#" class="nestTabNavbarLabel">操作</a></li>
+                                <li><a href="#"><i class="fa fa-save" aria-hidden="true"></i> 保存</a></li>
+                                <li><a href="#"><i class="fa fa-clone" aria-hidden="true"></i> 另存为</a></li>
+                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除模板</a></li>
+                                <li><a href="#" id="quit"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</a></li>
+                            </ul>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!--主体内容-->
+    <div style="position: fixed; top: 100px;left: 0;right: 0;bottom: 50px;">
+        <div class="container-fluid" style="height: 100%">
+            <div class="row" style="height: 100%">
+                <div class="col-md-6" style="height: 100%">
+                    <!--缩略图-->
+                    <a href="#" class="thumbnail vetically-child" style="width: 300px;height: 300px;">
+                        <img src="../../style/sample.png" alt="..." style="width: 100%;">
+                    </a>
+                </div>
+                <div class="col-md-6" style="height: 100%">
+                    <!--模板信息表单-->
+                    <form style="width: 80%;height: 80%" class="vetically-child">
+                        <div class="form-group">
+                            <label for="productName">产品名称</label>
+                            <input type="email" class="form-control" id="productName" placeholder="请输入产品名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="gatherLength">采集长度</label>
+                            <input type="password" class="form-control" id="gatherLength" placeholder="请输入采集长度">
+                        </div>
+                        <div class="form-group">
+                            <label for="number">小张个数</label>
+                            <input type="password" class="form-control" id="number" placeholder="请输入小张个数">
+                        </div>
+                        <div class="form-group">
+                            <label>产品类型</label>
+                            <select class="form-control">
+                                <option>吊牌</option>
+                                <option>烟包小盒</option>
+                                <option>烟包条盒</option>
+                                <option>烟包软包</option>
+                            </select>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">自动建模
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom nestStepChangeBar">
+        <div class="container-fluid">
+            <div class="navbar-form">
+                <button class="btn btn-default nestStepChangeBarLeftButton" id="prevStep"><i class="fa fa-chevron-left"></i> 上一步</button>
+                <button class="btn btn-default nestStepChangeBarRightButton" id="nextStep">下一步 <i class="fa fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
