@@ -1,0 +1,101 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Nest UI</title>
+  <!-- 引入bootstrap -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <!-- 引入awesome图标 -->
+  <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+  <!-- 引入jquery-ui -->
+  <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
+  <script src="../../jquery-ui/jquery-ui.js"></script>
+  <!-- 引入bootstrap-table -->
+  <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+  <script src="../../bootstrap-table/bootstrap-table.js"></script>
+  <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+  <!-- 引入自定义 -->
+  <link rel="stylesheet" href="../../standard/css/nest.css">
+
+  <script>
+
+    $(document).ready(function(){
+      $("#logout").on("click",function(){
+        window.location.href = "../../index.html";
+      });
+
+      $("#exit").on("click",function(){
+        window.location.href = "../home/nest-home.html";
+      });
+    });
+  </script>
+
+</head>
+<body>
+  <nav class="navbar navbar-default nestToolbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img alt="Brand" src="../../standard/image/focusight-logo.png">
+        </a>
+        <a class="navbar-brand" href="#">算法流程配置</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="toolbar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">子菜单项</a></li>
+              <li><a href="#">子菜单项</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">子菜单项</a></li>
+              <li><a href="#">子菜单项</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">子菜单项</a></li>
+              <li><a href="#">子菜单项</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" id="logout">用户退出</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><input type="radio" name="optionsRadios" checked> 中文</a></a></li>
+              <li><a href="#"><input type="radio" name="optionsRadios"> 英语</a></a></li>
+            </ul>
+          </li>
+          <li><a href="#" id="exit">关闭</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div style="position: fixed; top: 110px;left: 0;right: 0;bottom: 50px;">
+  </div>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom nestStatusBar">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+
+</body>
+</html>

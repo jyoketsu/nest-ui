@@ -1,0 +1,102 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Nest UI</title>
+  <!-- 引入bootstrap -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <!-- 引入awesome图标 -->
+  <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+  <!-- 引入jquery-ui -->
+  <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
+  <script src="../../jquery-ui/jquery-ui.js"></script>
+  <!-- 引入bootstrap-table -->
+  <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+  <script src="../../bootstrap-table/bootstrap-table.js"></script>
+  <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+  <!-- 引入自定义 -->
+  <link rel="stylesheet" href="../../standard/css/nest.css">
+
+  <script>
+
+    $(document).ready(function(){
+      $("#nest-home").on("click",function(){
+        window.location.href = "../home/nest-home.html";
+      });
+
+      $("#logout").on("click",function(){
+        window.location.href = "../../index.html";
+      });
+      $("#project-develop").on("click",function(){
+        window.location.href = "../project-develop/project-develop-home.html";
+      });
+      $("#algorithm-flow-config").on("click",function(){
+        window.location.href = "../algorithm-flow-config/algorithm-home.html";
+      });
+    });
+  </script>
+
+</head>
+<body>
+  <nav class="navbar navbar-default nestToolbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img alt="Brand" src="../../standard/image/focusight.png">
+        </a>
+        <a class="navbar-brand" href="#" id="nest-home"><i class="fa fa-home"></i> FS-Nest</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="toolbar">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" id="logout">用户退出</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#userManage-modal">用户管理</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">系统参数</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><input type="radio" name="optionsRadios" checked> 中文</a></a></li>
+              <li><a href="#"><input type="radio" name="optionsRadios"> 英语</a></a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">帮助 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">关于FS-NEST...</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div style="position: fixed; top: 110px;left: 0;right: 0;bottom: 50px;">
+    <div class="container">
+      <h1>用户管理</h1>
+    </div>
+
+  </div>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom nestStatusBar">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+
+</body>
+</html>

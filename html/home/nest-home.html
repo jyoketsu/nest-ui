@@ -1,0 +1,200 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Nest UI</title>
+  <!-- 引入bootstrap -->
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <!-- 引入awesome图标 -->
+  <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
+  <!-- 引入jquery-ui -->
+  <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
+  <script src="../../jquery-ui/jquery-ui.js"></script>
+  <!-- 引入bootstrap-table -->
+  <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+  <script src="../../bootstrap-table/bootstrap-table.js"></script>
+  <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+  <!-- 引入自定义 -->
+  <link rel="stylesheet" href="../../standard/css/nest.css">
+
+  <script>
+
+    $(document).ready(function(){
+      $("#nest-home").on("click",function(){
+        window.location.href = "../home/nest-home.html";
+      });
+
+      $("#logout").on("click",function(){
+        window.location.href = "../../index.html";
+      });
+      $("#user-manage").on("click",function(){
+        window.location.href = "../system-function/user-manage.html";
+      });
+      $("#param-options").on("click",function(){
+        window.location.href = "../system-function/param-options.html";
+      });
+      $("#project-develop").on("click",function(){
+        window.location.href = "../project-develop/project-develop-home.html";
+      });
+      $("#algorithm-flow-config").on("click",function(){
+        window.location.href = "../algorithm-flow-config/algorithm-home.html";
+      });
+    });
+  </script>
+
+</head>
+<body>
+  <nav class="navbar navbar-default nestToolbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img alt="Brand" src="../../standard/image/focusight.png">
+        </a>
+        <a class="navbar-brand" href="#" id="nest-home"><i class="fa fa-home"></i> FS-Nest</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="toolbar">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" id="logout">用户退出</a></li>
+              <li><a href="#" id="user-manage">用户管理</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" id="param-options">系统参数</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><input type="radio" name="optionsRadios" checked> 中文</a></a></li>
+              <li><a href="#"><input type="radio" name="optionsRadios"> 英语</a></a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">帮助 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" data-toggle="modal" data-target="#aboutFSNest-modal">关于FS-NEST...</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--<nav class="navbar navbar-default nestHotKey">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="hotKey">
+        <ul class="nav navbar-nav">
+          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="newModel" title="新建模板"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="loadModel" title="加载模板" data-toggle="modal" data-target="#modelManage-modal"><i class="fa fa-rotate-right fa-2x" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="editModel" title="编辑模板"><i class="fa fa-edit fa-2x" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-danger navbar-btn btnTooltip" id="closeModel" title="关闭模板" data-toggle="modal" data-target="#closeModalAlert"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="startDetect" title="开始检测"><i class="fa fa-play-circle fa-2x" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="newTrip" title="新建一车"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="loadTrip" title="加载车次"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></button>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li role="presentation" style="margin-top: 8px;"><a href="#" style="width: 200px;height: 40px;margin-left: 10px; background: url(../../style/focusight.png) no-repeat;background-size: contain"></a></li>
+        </ul>
+      </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;
+    </div>
+  </nav>-->
+
+  <div style="position: fixed; top: 110px;left: 0;right: 0;bottom: 50px;">
+    <div class="container">
+      <div class="list-group">
+        <a href="#" class="list-group-item" id="project-develop">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="package-name">项目快速开发</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="package-description">项目开发工具配置视觉系统项目,包含业务模块选择、界面配置、硬件信息配置等，最终组装成视觉项目。</p>
+            </div>
+            <div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12">
+
+            </div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item" id="algorithm-flow-config">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="package-name">算法流程配置</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="package-description">算法作为多个函数集，提供特定的功能集合，多个函数可以按照算法要求严格按照特定顺序调用以实现某特定功能。算法配置工具将基础算法配置成更加强大的新的算法。</p>
+            </div>
+            <div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12">
+
+            </div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="package-name">应用模块管理</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="package-description">对应用模块进行版本管控。包含应用模块的信息录入，应用模块的信息查询，应用模块的版本管理等。</p>
+            </div>
+            <div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12">
+
+            </div>
+          </div>
+        </a>
+        <a href="#" class="list-group-item">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="package-name">数据统计分析</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="package-description">系统提供质量管控的方法，用户可利用这些方法对产品缺陷或测量结果进行统计，另外利用质量管控方法，也可对我司设备的检测能力进行统计分析。</p>
+            </div>
+            <div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12">
+
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom nestStatusBar">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+
+      </div>
+    </div>
+  </nav>
+
+  <!--帮助模态框-->
+  <div class="modal fade" id="aboutFSNest-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">关于FS-Nest</h4>
+        </div>
+        <div class="modal-body" style="height: 200px">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
