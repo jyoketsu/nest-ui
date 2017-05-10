@@ -2,30 +2,25 @@
 <head>
   <meta charset="utf-8">
   <title>Nest UI</title>
-  <!-- 引入bootstrap -->
-  <link rel="stylesheet" href="../../css/bootstrap.min.css">
-  <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/bootstrap.min.js"></script>
-  <!-- 引入awesome图标 -->
-  <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
-  <!-- 引入jquery-ui -->
-  <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
-  <script src="../../jquery-ui/jquery-ui.js"></script>
-  <!-- 引入bootstrap-table -->
-  <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
-  <script src="../../bootstrap-table/bootstrap-table.js"></script>
-  <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
-  <!-- 引入自定义 -->
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+  <!-- awesome图标 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+  <!-- 自定义 -->
   <link rel="stylesheet" href="../../standard/css/nest.css">
 
   <script>
 
     $(document).ready(function(){
+      /*导航条事件开始*/
       $("#nest-home").on("click",function(){
         window.location.href = "../home/nest-home.html";
       });
-
-      $("#logout").on("click",function(){
+      // 退出登录
+      $("#logoutConfirmButton").on("click",function(){
         window.location.href = "../../index.html";
       });
       $("#user-manage").on("click",function(){
@@ -34,12 +29,19 @@
       $("#param-options").on("click",function(){
         window.location.href = "../system-function/param-options.html";
       });
+      /*导航条事件结束*/
+
+      /*模块路由事件开始*/
       $("#project-develop").on("click",function(){
         window.location.href = "../project-develop/project-develop-home.html";
       });
       $("#algorithm-flow-config").on("click",function(){
         window.location.href = "../algorithm-flow-config/algorithm-home.html";
       });
+      $("#product-detect").on("click",function(){
+        window.location.href = "../product-detect/product-detect.html";
+      });
+      /*模块路由事件结束*/
     });
   </script>
 
@@ -51,7 +53,7 @@
         <a class="navbar-brand" href="#">
           <img alt="Brand" src="../../standard/image/focusight.png">
         </a>
-        <a class="navbar-brand" href="#" id="nest-home"><i class="fa fa-home"></i> FS-Nest</a>
+        <a class="navbar-brand" href="#" id="nest-home"><i class="fa fa-home"></i>FS-Nest</a>
       </div>
 
       <div class="collapse navbar-collapse" id="toolbar">
@@ -59,9 +61,9 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>admin<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#" id="logout">用户退出</a></li>
+              <li><a href="#" id="logout" data-toggle="modal" data-target="#confirmLogoutDialog">用户退出</a></li>
               <li><a href="#" id="user-manage">用户管理</a></li>
             </ul>
           </li>
@@ -89,27 +91,7 @@
     </div>
   </nav>
 
-  <!--<nav class="navbar navbar-default nestHotKey">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="hotKey">
-        <ul class="nav navbar-nav">
-          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="newModel" title="新建模板"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="loadModel" title="加载模板" data-toggle="modal" data-target="#modelManage-modal"><i class="fa fa-rotate-right fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="editModel" title="编辑模板"><i class="fa fa-edit fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-danger navbar-btn btnTooltip" id="closeModel" title="关闭模板" data-toggle="modal" data-target="#closeModalAlert"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="startDetect" title="开始检测"><i class="fa fa-play-circle fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="newTrip" title="新建一车"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="loadTrip" title="加载车次"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></button>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li role="presentation" style="margin-top: 8px;"><a href="#" style="width: 200px;height: 40px;margin-left: 10px; background: url(../../style/focusight.png) no-repeat;background-size: contain"></a></li>
-        </ul>
-      </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;
-    </div>
-  </nav>-->
-
-  <div style="position: fixed; top: 110px;left: 0;right: 0;bottom: 50px;">
+  <div style="position: fixed; top: 110px;left: 0;right: 0;bottom: 50px;overflow: auto">
     <div class="container">
       <div class="list-group">
         <a href="#" class="list-group-item" id="project-develop">
@@ -165,6 +147,23 @@
           </div>
         </a>
       </div>
+
+      <div class="list-group">
+        <a href="#" class="list-group-item" id="product-detect">
+          <div class="row">
+            <div class="col-md-3">
+              <h4 class="package-name">产品检测</h4>
+            </div>
+            <div class="col-md-9 hidden-xs">
+              <p class="package-description"></p>
+            </div>
+            <div class="package-extra-info col-md-9 col-md-offset-3 col-xs-12">
+
+            </div>
+          </div>
+        </a>
+      </div>
+
     </div>
 
   </div>
@@ -190,6 +189,28 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--确认对话框-->
+  <div class="modal fade" id="confirmLogoutDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <!--对话框标题-->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title"><i class="fa fa-warning"></i>退出登录</h4>
+        </div>
+        <!--对话框内容-->
+        <div class="modal-body">
+          确定要退出吗？
+        </div>
+        <!--对话框按钮-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="logoutConfirmButton">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         </div>
       </div>
     </div>

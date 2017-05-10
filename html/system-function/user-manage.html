@@ -2,38 +2,34 @@
 <head>
   <meta charset="utf-8">
   <title>Nest UI</title>
-  <!-- 引入bootstrap -->
-  <link rel="stylesheet" href="../../css/bootstrap.min.css">
-  <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/bootstrap.min.js"></script>
-  <!-- 引入awesome图标 -->
-  <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
-  <!-- 引入jquery-ui -->
-  <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
-  <script src="../../jquery-ui/jquery-ui.js"></script>
-  <!-- 引入bootstrap-table -->
-  <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
-  <script src="../../bootstrap-table/bootstrap-table.js"></script>
-  <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+  <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+  <!-- awesome图标 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
   <!-- 引入自定义 -->
   <link rel="stylesheet" href="../../standard/css/nest.css">
 
   <script>
 
     $(document).ready(function(){
+      /*导航条事件开始*/
       $("#nest-home").on("click",function(){
         window.location.href = "../home/nest-home.html";
       });
-
-      $("#logout").on("click",function(){
+      // 退出登录
+      $("#logoutConfirmButton").on("click",function(){
         window.location.href = "../../index.html";
       });
-      $("#project-develop").on("click",function(){
-        window.location.href = "../project-develop/project-develop-home.html";
+      $("#user-manage").on("click",function(){
+        window.location.href = "../system-function/user-manage.html";
       });
-      $("#algorithm-flow-config").on("click",function(){
-        window.location.href = "../algorithm-flow-config/algorithm-home.html";
+      $("#param-options").on("click",function(){
+        window.location.href = "../system-function/param-options.html";
       });
+      /*导航条事件结束*/
     });
   </script>
 
@@ -45,7 +41,7 @@
         <a class="navbar-brand" href="#">
           <img alt="Brand" src="../../standard/image/focusight.png">
         </a>
-        <a class="navbar-brand" href="#" id="nest-home"><i class="fa fa-home"></i> FS-Nest</a>
+        <a class="navbar-brand" href="#" id="nest-home"><i class="fa fa-home"></i>FS-Nest</a>
       </div>
 
       <div class="collapse navbar-collapse" id="toolbar">
@@ -53,16 +49,16 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>admin<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#" id="logout">用户退出</a></li>
-              <li><a href="#" data-toggle="modal" data-target="#userManage-modal">用户管理</a></li>
+              <li><a href="#" id="logout" data-toggle="modal" data-target="#confirmLogoutDialog">用户退出</a></li>
+              <li><a href="#" id="user-manage">用户管理</a></li>
             </ul>
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">系统参数</a></li>
+              <li><a href="#" id="param-options">系统参数</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -97,6 +93,46 @@
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
+
+  <!--帮助模态框-->
+  <div class="modal fade" id="aboutFSNest-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">关于FS-Nest</h4>
+        </div>
+        <div class="modal-body" style="height: 200px">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--确认对话框-->
+  <div class="modal fade" id="confirmLogoutDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <!--对话框标题-->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title"><i class="fa fa-warning"></i>退出登录</h4>
+        </div>
+        <!--对话框内容-->
+        <div class="modal-body">
+          确定要退出吗？
+        </div>
+        <!--对话框按钮-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="logoutConfirmButton">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

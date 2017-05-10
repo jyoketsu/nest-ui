@@ -1,4 +1,15 @@
+/*导航条图标样式*/
 .navbar-brand img{
     height: 40px;
     margin-top: -12px;
+}
+
+/*表单验证错误样式*/
+.error{
+    color:red;
+}
+
+/*图标样式*/
+i.fa {
+    margin-right: 5px;
 }

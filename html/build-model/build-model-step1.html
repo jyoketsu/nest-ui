@@ -1,22 +1,22 @@
+<!doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Nest UI</title>
     <!-- 引入bootstrap -->
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
     <!-- 引入awesome图标 -->
-    <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css">
-    <!-- 引入jquery-ui -->
-    <link rel="stylesheet" href="../../jquery-ui/jquery-ui.css">
-    <script src="../../jquery-ui/jquery-ui.js"></script>
-    <!-- 引入bootstrap-table -->
-    <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
-    <script src="../../bootstrap-table/bootstrap-table.js"></script>
-    <script src="../../bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <!--引入jquery-validate-->
+    <script src="https://cdn.bootcss.com/jquery-validate/1.16.0/jquery.validate.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-validate/1.15.1/localization/messages_zh.js"></script>
+    <!--jquery.mockjax-->
+    <script src="https://cdn.bootcss.com/jquery-mockjax/1.6.2/jquery.mockjax.js"></script>
     <!-- 引入自定义 -->
     <link rel="stylesheet" href="../../standard/css/main.css">
+    <link rel="stylesheet" href="../../standard/css/nest.css">
     <script src="../../js/nest/main.js"></script>
 
     <script>
@@ -29,7 +29,59 @@
             $("#prevStep").attr("disabled",true);
             // 单击下一步按钮
             $("#nextStep").on("click",function(){
-                window.location.href = "./build-model-step2.html";
+                var validateFlag = $("#productInfoForm").valid();
+                if(validateFlag){
+                    $("#productInfoForm")[0].submit();
+                    // 进入下一步
+                    location.href = "./build-model-step2.html";
+                }
+            });
+
+            $.mockjax({
+                url: "productNameCheck.action",
+                response: function(settings) {
+                    var productName = settings.data.productName,
+                            names = ["aa", "bb", "xx", "test", "1"];
+                    this.responseText = "true";
+                    if ($.inArray(productName, names) !== -1) {
+                        this.responseText = "false";
+                    }
+                },
+                responseTime: 500
+            });
+
+            // 表单验证
+            $("#productInfoForm").validate({
+                rules:{
+                    productName:{
+                        required: true,
+                        maxlength: 20,
+                        remote: "productNameCheck.action"
+                    },
+                    gatherLength:{
+                        required: true,
+                        number:true,
+                        min:0
+                    },
+                    number:{
+                        required: true,
+                        digits:true,
+                        min:1
+                    }
+                },
+                messages:{
+                    productName: {
+                        required: "请输入产品名",
+                        maxlength: "产品名长度不能大于20字符",
+                        remote:jQuery.validator.format("{0} 已经存在")
+                    },
+                    gatherLength: {
+                        required: "请输入采集长度"
+                    },
+                    number: {
+                        required: "请输入小张个数"
+                    }
+                }
             });
         });
     </script>
@@ -85,22 +137,22 @@
                 </div>
                 <div class="col-md-6" style="height: 100%">
                     <!--模板信息表单-->
-                    <form style="width: 80%;height: 80%" class="vetically-child">
+                    <form style="width: 80%;height: 80%" class="vetically-child" id="productInfoForm">
                         <div class="form-group">
                             <label for="productName">产品名称</label>
-                            <input type="email" class="form-control" id="productName" placeholder="请输入产品名称">
+                            <input type="text" class="form-control" id="productName" name="productName" placeholder="请输入产品名称">
                         </div>
                         <div class="form-group">
                             <label for="gatherLength">采集长度</label>
-                            <input type="password" class="form-control" id="gatherLength" placeholder="请输入采集长度">
+                            <input type="text" class="form-control" id="gatherLength" name="gatherLength" placeholder="请输入采集长度">
                         </div>
                         <div class="form-group">
                             <label for="number">小张个数</label>
-                            <input type="password" class="form-control" id="number" placeholder="请输入小张个数">
+                            <input type="text" class="form-control" id="number" name="number" placeholder="请输入小张个数">
                         </div>
                         <div class="form-group">
                             <label>产品类型</label>
-                            <select class="form-control">
+                            <select class="form-control" id="productType" name="productType">
                                 <option>吊牌</option>
                                 <option>烟包小盒</option>
                                 <option>烟包条盒</option>
