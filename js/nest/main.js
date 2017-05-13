@@ -25,6 +25,3 @@ $(document).ready(function(){
         setContainerHeight();
     });
 });
-
-
-$( "#date" ).datepicker();

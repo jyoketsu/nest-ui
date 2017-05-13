@@ -1,15 +1,179 @@
-/*导航条图标样式*/
-.navbar-brand img{
-    height: 40px;
-    margin-top: -12px;
+/*布局相关--start--------------------------------------- */
+/*内容主体容器*/
+.nest-content{
+    /*background-color: #f5f8fa;*/
+    position: fixed;
+    top: 110px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    overflow: auto
 }
+
+/*垂直居中*/
+.vetically-parent{
+    position:relative
+}
+.vetically-child{
+    position:absolute;
+    left:0; right:0; top:0; bottom:0;
+    margin: auto;
+}
+
+.nestCol{
+    padding: 6px;
+}
+
+/*布局相关--end----------------------------------------- */
 
 /*表单验证错误样式*/
 .error{
     color:red;
 }
 
+/*导航条--start---------------------------------------- */
+
+/*导航条图标样式*/
+.nestToolbar .navbar-brand img{
+    height: 40px;
+    margin-top: -12px;
+}
+
 /*图标样式*/
-i.fa {
+.navbar a i.fa {
     margin-right: 5px;
+}
+
+.nestToolbar{
+    margin-bottom: auto;
+}
+
+.nestToolbar-blue{
+    margin-bottom: auto;
+    background-color: #438eb9;
+}
+.nestToolbar-blue a{
+    color: white !important;
+}
+.nestToolbar-blue .dropdown-menu{
+    background-color: #438eb9;
+}
+
+.nestToolbar-blue .navbar-nav>.open>a{
+    background-color: #2b669a !important;
+}
+
+.nestToolbar-blue .dropdown-menu>li>a:hover{
+    background-color: #2b669a !important;
+}
+
+/*导航条--end-------------------------------------------*/
+
+/*tab导航条--start--------------------------------------*/
+/*css类：nest-tab-navbar nest-nav-label nest-tab-nav-logo*/
+.nest-tab-navbar{
+    min-width: 1024px;
+    height: 92px;
+    border: 1px solid #ddd;
+    border-top-color: transparent;
+    box-shadow: 0 1px 8px rgba(0,0,0,.175);
+}
+.nest-tab-navbar li a i.fa{
+    margin-right: 5px;
+}
+
+/*tab导航条的tab选中后的颜色*/
+.nest-tab-navbar>.nav-tabs>li.active>a,
+.nest-tab-navbar>.nav-tabs>li.active>a:focus,
+.nest-tab-navbar>.nav-tabs>li.active>a:hover{
+    background-color: #f8f8f8;
+}
+.nest-tab-navbar .nav-tabs{
+    max-height: 42px;
+}
+
+/*存放tab导航logo的链接*/
+.nest-tab-navbar .nest-tab-nav-logo{
+    padding: 3px 15px 0px 15px;
+    cursor: default;
+}
+/*tab导航logo高度*/
+.nest-tab-navbar ul li a img{
+    height: 30px;
+}
+
+/*导航条 因为和tab合并了，所以取消自身的边框*/
+.nest-tab-navbar .navbar{
+    border: none;
+}
+/*tab菜单导航条label*/
+.nest-tab-navbar .nest-nav-label {
+    padding-right: 5px!important;
+    padding-left: 5px!important;
+    cursor: default;
+    color: #D3D3D3!important;
+}
+
+/*tab菜单导航条ul*/
+.nest-tab-navbar .tab-content .navbar-nav{
+    border-right: 1px solid #ddd;
+}
+/*tab导航条--end------------------------------------------*/
+
+.nestHotKey{
+    margin-bottom: 10px;
+}
+
+.nestTab > .tab-content > .tab-pane{
+    height: 100%;
+    padding: 2px;
+}
+
+.nestStatusBar input{
+    width: 50px !important;
+}
+
+
+.nestStepChangeBar>.container-fluid>div{
+    width: 500px;
+    height: 34px;
+    position:absolute;
+    left:0; right:0; top:0; bottom:0;
+    margin: auto;
+}
+.nestStepChangeBar .nestStepChangeBarLeftButton{
+    float: left;
+}
+.nestStepChangeBar .nestStepChangeBarRightButton{
+    float: right;
+}
+
+/* treeView */
+.nestTreeButton{
+    opacity: 0;
+}
+.nestTreeButton:hover{
+    opacity: 1;
+}
+
+.nest-btn-group{
+    margin-bottom: 5px;
+}
+
+.smallTab>li{
+    font-size: 10px;
+}
+.smallTab>li>a{
+    position: relative;
+    padding: 5px 5px;
+}
+
+.smallTabContent label{
+    font-weight: normal;
+}
+
+/*圆角边框*/
+.radiusBorder{
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }

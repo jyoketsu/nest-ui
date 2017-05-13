@@ -18,9 +18,20 @@
   <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
 
   <!-- 自定义 -->
-  <link rel="stylesheet" href="../../standard/css/main.css">
+  <link rel="stylesheet" href="../../standard/css/nest.css">
   <script src="../../js/nest/main.js"></script>
 
+  <style>
+    .nest-slider {
+      width: 40%;
+      position: absolute;
+      bottom: 0;
+      left:30%;
+      margin: 10px;
+    }
+    #slider .ui-slider-range { background-color: #729fcf; }
+    #slider .ui-slider-handle { border-color: #729fcf; }
+  </style>
   <script>
     $(function() {
       $("#slider").slider({
@@ -74,7 +85,7 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-default nestToolbar">
+  <nav class="navbar navbar-default nestToolbar-blue">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -134,9 +145,8 @@
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><i class="fa fa-user"></i> admin</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户 <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>admin<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#" id="logout">用户退出</a></li>
               <li><a href="#" data-toggle="modal" data-target="#userManage-modal">用户管理</a></li>
@@ -175,8 +185,8 @@
     </div>
   </nav>
 
-  <div style="position: fixed; top: 110px;left: 0;right: 0;bottom: 50px;">
-    <div class="container-fluid" style="position: relative; height: 100%">
+  <div class="nest-content">
+    <div class="container-fluid" style="position: relative; height: 100%;">
       <div class="row" style="height: 100%">
         <div class="col-md-8 nestCol" style="height: 100%">
           <div style="height: 60%;">
@@ -206,7 +216,7 @@
             <div class="nestContainer" id="thumbnailContainer" style="background-color: #00b4ef">
               <div class="nestThumbnail" style="height: 100%;background-color: #808080"><p style="color: white">图片列表组件</p></div>
             </div>
-            <div class="nestSlider" id="slider"></div>
+            <div class="nest-slider" id="slider"></div>
           </div>
         </div>
         <div class="col-md-4 nestCol" style="height: 100%">

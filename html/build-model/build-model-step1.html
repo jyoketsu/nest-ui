@@ -15,7 +15,6 @@
     <!--jquery.mockjax-->
     <script src="https://cdn.bootcss.com/jquery-mockjax/1.6.2/jquery.mockjax.js"></script>
     <!-- 引入自定义 -->
-    <link rel="stylesheet" href="../../standard/css/main.css">
     <link rel="stylesheet" href="../../standard/css/nest.css">
     <script src="../../js/nest/main.js"></script>
 
@@ -86,20 +85,23 @@
         });
     </script>
 </head>
-<body style="background-color: #f5f8fa">
+<body>
     <!-- tab菜单 -->
-    <div class="nestTabMenu">
+    <div class="nestTabMenu nest-tab-navbar">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#" style="width: 250px;height: 42px;margin-left: 10px; background: url(../../standard/image/focusight.png) no-repeat;background-size: contain"></a></li>
+            <li>
+                <a href="#" class="nest-tab-nav-logo">
+                    <img alt="Brand" src="../../standard/image/focusight.png">
+                </a>
+            </li>
             <li role="presentation" class="active"><a href="#system" aria-controls="station1" role="tab" data-toggle="tab"><i class="fa fa-gears" aria-hidden="true"></i> 系统</a></li>
         </ul>
         <!-- 标签面板 -->
-        <div class="tab-content nestTabContent">
+        <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="system">
                 <!-- tab菜单导航条 -->
-                <nav class="navbar navbar-default nestTabNavbar">
+                <nav class="navbar navbar-default">
                     <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
@@ -110,9 +112,9 @@
                             <a class="navbar-brand" href="#"></a>
                         </div>
 
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nestTabNavbarLabel">操作</a></li>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#" class="nest-nav-label">操作</a></li>
                                 <li><a href="#"><i class="fa fa-save" aria-hidden="true"></i> 保存</a></li>
                                 <li><a href="#"><i class="fa fa-clone" aria-hidden="true"></i> 另存为</a></li>
                                 <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除模板</a></li>
