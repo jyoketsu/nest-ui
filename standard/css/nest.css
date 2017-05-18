@@ -1,3 +1,63 @@
+/*logo--start--------------------------------------- */
+.nest-logo img{
+   height: 35px;
+}
+/*logo--end----------------------------------------- */
+
+/*字体--start----------------------------------------- */
+/*小号字体*/
+.nest-small-font{
+    font-size: 10px;
+}
+
+/*页面大标题*/
+h1.nest-title{
+    font-weight: 700;
+    font-size: 36px;
+}
+
+/*大号字*/
+h4.nest-large-font,.nest-large-font{
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/*正文 默认字体*/
+.nest-default-font{
+    font-size: 14px;
+}
+
+/*小号表单*/
+.nest-small-form{
+    font-size: 10px;
+}
+.nest-small-form .control-label{
+    padding-top: 5px;
+    font-weight: normal;
+}
+.nest-small-form .form-control{
+    height: 25px;
+    padding: 1px 6px;
+    font-size: 10px;
+}
+
+/*小号标签页*/
+.nest-small-tab>.nav-tabs>li{
+    font-size: 10px;
+}
+.nest-small-tab>.nav-tabs>li>a{
+    position: relative;
+    padding: 5px 5px;
+}
+.nest-small-tab>.tab-content{
+    font-size: 10px;
+}
+.nest-small-tab>.tab-content label{
+    font-weight: normal;
+}
+
+/*字体--end------------------------------------------- */
+
 /*布局相关--start--------------------------------------- */
 /*内容主体容器*/
 .nest-content{
@@ -35,8 +95,7 @@
 
 /*导航条图标样式*/
 .nestToolbar .navbar-brand img{
-    height: 40px;
-    margin-top: -12px;
+    margin-top: -10px;
 }
 
 /*图标样式*/
@@ -93,13 +152,9 @@
 }
 
 /*存放tab导航logo的链接*/
-.nest-tab-navbar .nest-tab-nav-logo{
-    padding: 3px 15px 0px 15px;
+.nest-tab-navbar .nest-logo{
+    padding: 2px 15px 0px 15px;
     cursor: default;
-}
-/*tab导航logo高度*/
-.nest-tab-navbar ul li a img{
-    height: 30px;
 }
 
 /*导航条 因为和tab合并了，所以取消自身的边框*/
@@ -158,18 +213,6 @@
 
 .nest-btn-group{
     margin-bottom: 5px;
-}
-
-.smallTab>li{
-    font-size: 10px;
-}
-.smallTab>li>a{
-    position: relative;
-    padding: 5px 5px;
-}
-
-.smallTabContent label{
-    font-weight: normal;
 }
 
 /*圆角边框*/
