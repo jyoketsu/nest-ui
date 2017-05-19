@@ -51,6 +51,7 @@ h4.nest-large-font,.nest-large-font{
 }
 .nest-small-tab>.tab-content{
     font-size: 10px;
+    padding-top: 5px;
 }
 .nest-small-tab>.tab-content label{
     font-weight: normal;
