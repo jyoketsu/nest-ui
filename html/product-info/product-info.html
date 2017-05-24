@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>产品管理</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <!-- awesome图标 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <!-- jquery-ui -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.css">
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
+    <!-- bootstrap-table -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css">
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- nest样式 -->
+    <link rel="stylesheet" href="../../standard/css/nest.css">
+    <script src="../../standard/js/nest.js"></script>
+    <style>
+        .ml10 {
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        var selectedRow = "";
+        var deleteType = "";
+        function actionFormatter(value, row, index) {
+            return [
+                '<a class="detect ml10" href="javascript:void(0)" title="开始检测">',
+                '<i class="fa fa-play-circle"></i>',
+                '</a>',
+                '<a class="edit ml10" href="javascript:void(0)" title="编辑产品">',
+                '<i class="fa fa-pencil-square-o"></i>',
+                '</a>',
+                '<a class="remove ml10" href="javascript:void(0)" title="删除产品">',
+                '<i class="fa fa-trash"></i>',
+                '</a>'
+            ].join('');
+        }
+        window.actionEvents = {
+            'click .detect': function (e, value, row, index) {
+                sessionStorage.setItem("prePage", "product-info");
+                window.location.href = "../product-detect/product-detect.html";
+                console.log(value, row, index);
+            },
+            'click .edit': function (e, value, row, index) {
+                sessionStorage.setItem("prePage", "product-info");
+                window.location.href = "../build-model/build-model-step1.html";
+                console.log(value, row, index);
+            },
+            'click .remove': function (e, value, row, index) {
+                deleteType = "single";
+                deleteProductConfirm(row);
+                console.log(value, row, index);
+            }
+        };
+
+        // todo delete模拟删除产品
+        function deleteProductConfirm(row){
+            var text = "";
+            if (deleteType=="single") {
+                text = "确定要删除"+row.product_name+"吗？";
+            } else {
+                text = "确定要删除选中的产品吗？";
+            }
+            $("#deleteProduct-modal").find(".modal-body").html(text);
+            $("#deleteProduct-modal").modal("show");
+
+        }
+        // todo delete模拟删除产品
+        function deleteProduct() {
+            var ids=[];
+            if (deleteType=="single") {
+                ids = [selectedRow.id];
+            } else {
+                var selections = $("#product-table").bootstrapTable('getSelections');
+                ids=[];
+                for(var i=0;i<selections.length;i++){
+                    ids.push(selections[i].id);
+                }
+            }
+            $("#product-table").bootstrapTable('remove', {field: 'id', values: ids});
+            $("#deleteProduct-modal").modal("hide");
+        }
+
+        $(document).ready(function () {
+            // 表格行选中
+            var $table = $('#product-table');
+            $table.on('click-row.bs.table', function (e, row, $element) {
+                $('.success').removeClass('success');
+                $($element).addClass('success');
+                selectedRow = row;
+
+                // todo delete 产品信息连动模拟
+                console.log(row);
+                $("#mould-info").find(".panel-title").html(row.product_name+"模板信息");
+                var imgPath = "";
+                if(row.id%2==0){
+                    imgPath = "../../data/image/test1.png";
+                } else {
+                    imgPath = "../../data/image/test2.png";
+                }
+                $("#mould-info").find("img").attr("src",imgPath);
+                $("#detect-info").find(".panel-title").html(row.product_name+"检测信息");
+            });
+
+            // 单击登出按钮
+            $("#logout").on("click",function(){
+                window.location.href = "../../index.html";
+            });
+
+            // 单击关闭按钮
+            $("#exit").on("click",function(){
+                window.location.href = "../home/nest-home.html";
+            });
+            
+            // 双击产品缩略图
+            $("#product-thumbnail").on("dblclick",function () {
+                sessionStorage.setItem("prePage", "product-info");
+                window.location.href = "../build-model/build-model-step1.html";
+            });
+            // 单击新建产品
+            $("#addProduct").on("click",function () {
+                sessionStorage.setItem("prePage", "product-info");
+                window.location.href = "../build-model/build-model-step1.html";
+            });
+            // 删除产品
+            $("#deleteProduct-button").on("click",function () {
+                deleteProduct();
+            });
+            $("#multi-delete").on("click",function () {
+                deleteType = "multi";
+                deleteProductConfirm("");
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="nest-head">
+    <nav class="navbar navbar-default nestToolbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand nest-logo" href="#">
+                    <img alt="Brand" src="../../standard/image/focusight-logo.png">
+                </a>
+                <a class="navbar-brand" href="#">产品管理</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="toolbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="logout">用户退出</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><input type="radio" name="optionsRadios" checked> 简体中文</a></a></li>
+                            <li><a href="#"><input type="radio" name="optionsRadios"> English</a></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" id="exit">关闭</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+
+<div class="nest-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 nestCol">
+                <div class="nest-section">
+                    <div id="product-toolbar" class="btn-group">
+                        <button type="button" class="btn btn-primary" id="addProduct" title="新建产品">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger" id="multi-delete" title="删除选中产品">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </div>
+
+                    <table id="product-table" data-toggle="table" data-url="../../data/productData.json"
+                           data-search="true"
+                           data-show-refresh="true"
+                           data-show-columns="true"
+                           data-toolbar="#product-toolbar"
+
+                           data-height="540"
+
+                           data-pagination="true"
+                           data-page-list="[5, 10, 20]">
+                        <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="true"></th>
+                            <th data-field="product_name">产品名称</th>
+                            <th data-field="product_type">产品类型</th>
+                            <th data-field="device_name">设备名称</th>
+                            <th data-field="device_state">设备状态</th>
+                            <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+
+
+            </div>
+            <div class="col-md-4 nestCol">
+                <div class="nest-section">
+                    <div class="panel panel-default" id="mould-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">模板信息</h3>
+                        </div>
+                        <div class="panel-body">
+                            <a href="#" class="thumbnail" style="margin-bottom: 0" id="product-thumbnail" title="双击编辑">
+                                <img src="" style="height: 180px;">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default" id="detect-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">检测信息</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" id="detect-info-form">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">已检总数</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">坏品总数</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">坏品比例</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">拒检总数</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">检测速度</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--删除确认对话框-->
+<div class="modal fade" id="deleteProduct-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <!--对话框标题-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i>删除产品</h4>
+            </div>
+            <!--对话框内容-->
+            <div class="modal-body">
+                确定要删除该产品吗？
+            </div>
+            <!--对话框按钮-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="deleteProduct-button">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

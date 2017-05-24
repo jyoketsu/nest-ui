@@ -9,8 +9,9 @@
   <!-- awesome图标 -->
   <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
-  <!-- 引入自定义 -->
+  <!-- nest样式 -->
   <link rel="stylesheet" href="../../standard/css/nest.css">
+  <script src="../../standard/js/nest.js"></script>
 
   <script>
 
@@ -27,69 +28,83 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-default nestToolbar">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand nest-logo" href="#">
-          <img alt="Brand" src="../../standard/image/focusight-logo.png">
-        </a>
-        <a class="navbar-brand" href="#">项目快速开发</a>
-      </div>
+  <div class="nest-head">
+    <nav class="navbar navbar-default nestToolbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand nest-logo" href="#">
+            <img alt="Brand" src="../../standard/image/focusight-logo.png">
+          </a>
+          <a class="navbar-brand" href="#">项目快速开发</a>
+        </div>
 
-      <div class="collapse navbar-collapse" id="toolbar">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">子菜单项</a></li>
-              <li><a href="#">子菜单项</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">子菜单项</a></li>
-              <li><a href="#">子菜单项</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">子菜单项</a></li>
-              <li><a href="#">子菜单项</a></li>
-            </ul>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#" id="logout">用户退出</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#"><input type="radio" name="optionsRadios" checked> 中文</a></a></li>
-              <li><a href="#"><input type="radio" name="optionsRadios"> 英语</a></a></li>
-            </ul>
-          </li>
-          <li><a href="#" id="exit">关闭</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <div style="position: fixed; top: 110px;left: 0;right: 0;bottom: 50px;">
+        <div class="collapse navbar-collapse" id="toolbar">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">子菜单项</a></li>
+                <li><a href="#">子菜单项</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">子菜单项</a></li>
+                <li><a href="#">子菜单项</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">菜单项<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">子菜单项</a></li>
+                <li><a href="#">子菜单项</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" id="logout">用户退出</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><input type="radio" name="optionsRadios" checked> 简体中文</a></a></li>
+                <li><a href="#"><input type="radio" name="optionsRadios"> English</a></a></li>
+              </ul>
+            </li>
+            <li><a href="#" id="exit">关闭</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
   </div>
 
-  <nav class="navbar navbar-default navbar-fixed-bottom nestStatusBar">
+  <div class="nest-content">
     <div class="container-fluid">
-      <div class="collapse navbar-collapse">
-
-      </div><!-- /.navbar-collapse -->
+      <div class="row">
+        <div class="col-md-4 nestCol">
+          <div class="nest-section"></div>
+        </div>
+        <div class="col-md-8 nestCol">
+          <div class="nest-section"></div>
+        </div>
+      </div>
     </div>
-  </nav>
+  </div>
+
+  <div class="nest-footer">
+    <nav class="navbar navbar-default nestStatusBar">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+  </div>
 
 </body>
 </html>

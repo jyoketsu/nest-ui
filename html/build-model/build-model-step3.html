@@ -16,9 +16,9 @@
     <!-- treeview插件 -->
     <script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
 
-    <!-- 自定义 -->
+    <!-- nest样式 -->
     <link rel="stylesheet" href="../../standard/css/nest.css">
-    <script src="../../js/nest/main.js"></script>
+    <script src="../../standard/js/nest.js"></script>
     <script src="../../data/step3TreeData.js"></script>
 
     <style>
@@ -51,7 +51,12 @@
         $(document).ready(function(){
             // 单击退出按钮
             $("#quit").on("click",function(){
-                window.location.href = "../product-detect/product-detect.html";
+                var prePage = sessionStorage.getItem("prePage")
+                if(prePage == "product-info"){
+                    window.location.href = "../product-info/product-info.html";
+                } else if (prePage == "product-detect"){
+                    window.location.href = "../product-detect/product-detect.html";
+                }
             });
             // 单击上一步按钮
             $("#prevStep").on("click",function(){
@@ -59,7 +64,12 @@
             });
             // 单击下一步按钮
             $("#nextStep").on("click",function(){
-                window.location.href = "../product-detect/product-detect.html";
+                var prePage = sessionStorage.getItem("prePage")
+                if(prePage == "product-info"){
+                    window.location.href = "../product-info/product-info.html";
+                } else if (prePage == "product-detect"){
+                    window.location.href = "../product-detect/product-detect.html";
+                }
             });
 
             $('#tree').treeview({data: getTree()});
@@ -94,10 +104,12 @@
             $("#collapse-button").on("click",function(){
                 if($(this).find("i").attr("class")=="fa fa-angle-double-right"){
                     // jquery ui switchClass
-                    $("#center-content").switchClass( "col-md-7", "col-md-10", 500);
+                    $("#right-content").css( "display", "none");
+                    $("#center-content").switchClass( "col-md-6", "col-md-9", 500);
                     $(this).find("i").attr("class","fa fa-angle-double-left");
                 } else {
-                    $("#center-content").switchClass( "col-md-10", "col-md-7", 500);
+                    $("#right-content").css( "display", "block");
+                    $("#center-content").switchClass( "col-md-9", "col-md-6", 500);
                     $(this).find("i").attr("class","fa fa-angle-double-right")
                 }
             });
@@ -157,732 +169,736 @@
     </script>
 </head>
 <body>
-    <!-- tab菜单 -->
-    <div class="nest-tab-navbar">
-        <ul class="nav nav-tabs" role="tablist">
-            <li>
-                <a href="#" class="nest-logo">
-                    <img alt="Brand" src="../../standard/image/focusight.png">
-                </a>
-            </li>
-            <li role="presentation" class="active"><a href="#system" aria-controls="system" role="tab" data-toggle="tab"><i class="fa fa-gears" aria-hidden="true"></i> 系统</a></li>
-            <li role="presentation"><a href="#object" aria-controls="object" role="tab" data-toggle="tab"><i class="fa fa-check-square-o" aria-hidden="true"></i> 对象</a></li>
-            <li role="presentation"><a href="#auto" aria-controls="auto" role="tab" data-toggle="tab"><i class="fa fa-automobile" aria-hidden="true"></i> 自动</a></li>
-            <li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab"><i class="fa fa-image" aria-hidden="true"></i> 视图</a></li>
-        </ul>
-        <!-- 标签面板 -->
-        <div class="tab-content nestTabContent">
-            <div role="tabpanel" class="tab-pane fade in active" id="system">
-                <!-- tab菜单导航条 -->
-                <nav class="navbar navbar-default nestTabNavbar">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#"></a>
-                        </div>
+    <div class="nest-head">
+        <!-- tab菜单 -->
+        <div class="nest-tab-navbar">
+            <ul class="nav nav-tabs" role="tablist">
+                <li>
+                    <a href="#" class="nest-logo">
+                        <img alt="Brand" src="../../standard/image/focusight.png">
+                    </a>
+                </li>
+                <li role="presentation" class="active"><a href="#system" aria-controls="system" role="tab" data-toggle="tab"><i class="fa fa-gears" aria-hidden="true"></i> 系统</a></li>
+                <li role="presentation"><a href="#object" aria-controls="object" role="tab" data-toggle="tab"><i class="fa fa-check-square-o" aria-hidden="true"></i> 对象</a></li>
+                <li role="presentation"><a href="#auto" aria-controls="auto" role="tab" data-toggle="tab"><i class="fa fa-automobile" aria-hidden="true"></i> 自动</a></li>
+                <li role="presentation"><a href="#view" aria-controls="view" role="tab" data-toggle="tab"><i class="fa fa-image" aria-hidden="true"></i> 视图</a></li>
+            </ul>
+            <!-- 标签面板 -->
+            <div class="tab-content nestTabContent">
+                <div role="tabpanel" class="tab-pane fade in active" id="system">
+                    <!-- tab菜单导航条 -->
+                    <nav class="navbar navbar-default nestTabNavbar">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#"></a>
+                            </div>
 
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">操作</a></li>
-                                <li><a href="#"><i class="fa fa-save" aria-hidden="true"></i>保存</a></li>
-                                <li><a href="#"><i class="fa fa-clone" aria-hidden="true"></i>另存为</a></li>
-                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i>删除模板</a></li>
-                                <li><a href="#" id="quit"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a></li>
-                            </ul>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">操作</a></li>
+                                    <li><a href="#"><i class="fa fa-save" aria-hidden="true"></i>保存</a></li>
+                                    <li><a href="#"><i class="fa fa-clone" aria-hidden="true"></i>另存为</a></li>
+                                    <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i>删除模板</a></li>
+                                    <li><a href="#" id="quit"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="object">
-                <!-- tab菜单导航条 -->
-                <nav class="navbar navbar-default nestTabNavbar">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#"></a>
-                        </div>
+                    </nav>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="object">
+                    <!-- tab菜单导航条 -->
+                    <nav class="navbar navbar-default nestTabNavbar">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#"></a>
+                            </div>
 
-                        <div class="collapse navbar-collapse" id="navbar-collapse-2">
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">操作</a></li>
-                                <li><a href="#"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 选择</a></li>
-                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">检测范围</a></li>
-                                <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 检测范围</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">层次</a></li>
-                                <li><a href="#"><i class="fa fa-long-arrow-down" aria-hidden="true"></i> 至于底层</a></li>
-                            </ul>
+                            <div class="collapse navbar-collapse" id="navbar-collapse-2">
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">操作</a></li>
+                                    <li><a href="#"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> 选择</a></li>
+                                    <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">检测范围</a></li>
+                                    <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 检测范围</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">层次</a></li>
+                                    <li><a href="#"><i class="fa fa-long-arrow-down" aria-hidden="true"></i> 至于底层</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="auto">
-                <!-- tab菜单导航条 -->
-                <nav class="navbar navbar-default nestTabNavbar">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#"></a>
-                        </div>
+                    </nav>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="auto">
+                    <!-- tab菜单导航条 -->
+                    <nav class="navbar navbar-default nestTabNavbar">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#"></a>
+                            </div>
 
-                        <div class="collapse navbar-collapse" id="navbar-collapse-3">
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">自动功能</a></li>
-                                <li><a href="#"><i class="fa fa-photo" aria-hidden="true"></i> 背景检测区</a></li>
-                                <li><a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i> 前景检测区</a></li>
-                                <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 定位核</a></li>
-                                <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> 参数设置</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">可变信息</a></li>
-                                <li><a href="#"><i class="fa fa-barcode" aria-hidden="true"></i> 一维码</a></li>
-                                <li><a href="#"><i class="fa fa-barcode" aria-hidden="true"></i> 一维字符码</a></li>
-                                <li><a href="#"><i class="fa fa-qrcode" aria-hidden="true"></i> 二维码</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">区域</a></li>
-                                <li><a href="#"><i class="fa fa-compress" aria-hidden="true"></i> 腐蚀</a></li>
-                                <li><a href="#"><i class="fa fa-expand" aria-hidden="true"></i> 膨胀</a></li>
-                                <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> 参数设置</a></li>
-                            </ul>
+                            <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">自动功能</a></li>
+                                    <li><a href="#"><i class="fa fa-photo" aria-hidden="true"></i> 背景检测区</a></li>
+                                    <li><a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i> 前景检测区</a></li>
+                                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> 定位核</a></li>
+                                    <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> 参数设置</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">可变信息</a></li>
+                                    <li><a href="#"><i class="fa fa-barcode" aria-hidden="true"></i> 一维码</a></li>
+                                    <li><a href="#"><i class="fa fa-barcode" aria-hidden="true"></i> 一维字符码</a></li>
+                                    <li><a href="#"><i class="fa fa-qrcode" aria-hidden="true"></i> 二维码</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">区域</a></li>
+                                    <li><a href="#"><i class="fa fa-compress" aria-hidden="true"></i> 腐蚀</a></li>
+                                    <li><a href="#"><i class="fa fa-expand" aria-hidden="true"></i> 膨胀</a></li>
+                                    <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> 参数设置</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="view">
-                <!-- tab菜单导航条 -->
-                <nav class="navbar navbar-default nestTabNavbar">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#"></a>
-                        </div>
+                    </nav>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="view">
+                    <!-- tab菜单导航条 -->
+                    <nav class="navbar navbar-default nestTabNavbar">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#"></a>
+                            </div>
 
-                        <div class="collapse navbar-collapse" id="navbar-collapse-4">
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">适应</a></li>
-                                <li><a href="#"><i class="fa fa-image" aria-hidden="true"></i> 原始图像</a></li>
-                                <li><a href="#"><i class="fa fa-arrows-h" aria-hidden="true"></i> 适应宽度</a></li>
-                                <li><a href="#"><i class="fa fa-arrows-v" aria-hidden="true"></i> 适应高度</a></li>
-                                <li><a href="#"><i class="fa fa-arrows-alt" aria-hidden="true"></i> 适应窗口</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">缩放</a></li>
-                                <li><a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i> 放大</a></li>
-                                <li><a href="#"><i class="fa fa-search-minus" aria-hidden="true"></i> 缩小</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav nestNavbarUl">
-                                <li><a href="#" class="nest-nav-label">元素</a></li>
-                                <li><a href="#"><i class="fa fa-square" aria-hidden="true"></i> 显示掩膜</a></li>
-                                <li><a href="#"><i class="fa fa-square-o" aria-hidden="true"></i> 动态边框</a></li>
-                            </ul>
+                            <div class="collapse navbar-collapse" id="navbar-collapse-4">
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">适应</a></li>
+                                    <li><a href="#"><i class="fa fa-image" aria-hidden="true"></i> 原始图像</a></li>
+                                    <li><a href="#"><i class="fa fa-arrows-h" aria-hidden="true"></i> 适应宽度</a></li>
+                                    <li><a href="#"><i class="fa fa-arrows-v" aria-hidden="true"></i> 适应高度</a></li>
+                                    <li><a href="#"><i class="fa fa-arrows-alt" aria-hidden="true"></i> 适应窗口</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">缩放</a></li>
+                                    <li><a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i> 放大</a></li>
+                                    <li><a href="#"><i class="fa fa-search-minus" aria-hidden="true"></i> 缩小</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav nestNavbarUl">
+                                    <li><a href="#" class="nest-nav-label">元素</a></li>
+                                    <li><a href="#"><i class="fa fa-square" aria-hidden="true"></i> 显示掩膜</a></li>
+                                    <li><a href="#"><i class="fa fa-square-o" aria-hidden="true"></i> 动态边框</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
 
+
     <!--主体内容-->
-    <div style="position: fixed; top: 100px;left: 0;right: 0;bottom: 50px;">
-        <div class="container-fluid" style="height: 100%;">
+    <div class="nest-content">
+        <div class="container-fluid">
             <a class="btn btn-default" href="#" role="button" id="collapse-button"><i class="fa fa-angle-double-right"></i></a>
-            <div class="row" style="height: 100%">
+            <div class="row">
                 <!--布局左侧内容-->
-                <div class="col-md-2 nestCol" style="height: 100%;">
-
-                    <div class="btn-toolbar" role="toolbar" aria-label="..." id="btnToolbar">
-                        <div class="btn-group btn-group-sm nest-btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default" id="collapse"><i class="fa fa-minus"></i></button>
+                <div class="col-md-3 nestCol">
+                    <div class="nest-section">
+                        <div class="btn-toolbar" role="toolbar" aria-label="..." id="btnToolbar">
+                            <div class="btn-group btn-group-sm nest-btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-default" id="collapse"><i class="fa fa-minus"></i></button>
+                            </div>
+                            <div class="btn-group btn-group-sm nest-btn-group" role="group" id="imageToolbar" style="display: none">
+                                <button type="button" class="btn btn-info btnTooltip" title="增加分组"><i class="fa fa-plus-square"></i></button>
+                                <button type="button" class="btn btn-info btnTooltip" title="显示全部"><i class="fa fa-check-square-o"></i></button>
+                            </div>
+                            <div class="btn-group btn-group-sm nest-btn-group" role="group" id="groupToolbar" style="display: none">
+                                <button type="button" class="btn btn-info btnTooltip" title="增加对象"><i class="fa fa-plus-square"></i></button>
+                                <button type="button" class="btn btn-danger btnTooltip" title="删除分组"><i class="fa fa-trash"></i></button>
+                            </div>
                         </div>
-                        <div class="btn-group btn-group-sm nest-btn-group" role="group" id="imageToolbar" style="display: none">
-                            <button type="button" class="btn btn-info btnTooltip" title="增加分组"><i class="fa fa-plus-square"></i></button>
-                            <button type="button" class="btn btn-info btnTooltip" title="显示全部"><i class="fa fa-check-square-o"></i></button>
-                        </div>
-                        <div class="btn-group btn-group-sm nest-btn-group" role="group" id="groupToolbar" style="display: none">
-                            <button type="button" class="btn btn-info btnTooltip" title="增加对象"><i class="fa fa-plus-square"></i></button>
-                            <button type="button" class="btn btn-danger btnTooltip" title="删除分组"><i class="fa fa-trash"></i></button>
+                        <div id="treeContainer" style="overflow: auto;">
+                            <div id="tree"></div>
                         </div>
                     </div>
-
-                    <div id="treeContainer" style="overflow: auto;">
-                        <div id="tree" style="width: 215px"></div>
-                    </div>
-
-
                 </div>
                 <!--布局中间内容-->
-                <div class="col-md-7 nestCol" style="height: 100%;" id="center-content">
-                    <div id="canvas" style="height: 100%;background-color: #0f0f0f;">
-                        <p style="color: white">绘图组件</p>
+                <div class="col-md-6 nestCol" id="center-content">
+                    <div class="nest-section">
+                        <div id="canvas" style="height: 100%;background-color: #0f0f0f;">
+                            <p style="color: white">绘图组件</p>
+                        </div>
                     </div>
                 </div>
                 <!--布局右侧内容-->
-                <!--折叠按钮-->
-                <div class="col-md-3 nestCol" style="height: 100%;overflow-y: auto" id="right-content">
-                    <!--面板-->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">对象#1</h3>
-                        </div>
-                        <div class="panel-body" style="padding: 5px">
-                            <form class="form-horizontal nest-small-form">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <select class="form-control" id="algorithm-select">
-                                            <option value="rotate">转正</option>
-                                            <option value="area-search">区域定位</option>
-                                            <option value="compare">比对检测</option>
-                                            <option value="barcode">条码检测</option>
-                                            <option value="character">字符检测</option>
-                                            <option value="qrcode">二维码识读</option>
-                                            <option value="lowContrast">低对比度检测</option>
-                                            <option value="offset">偏位检测</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group algorithm-param" id="area-location">
-                                    <label class="col-sm-4 control-label">区域定位</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="nest-small-tab">
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本参数</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">高级参数</a></li>
-                                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">仿真参数</a></li>
-                                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">仿真</a></li>
-                                    </ul>
-
-                                    <!-- Tab panes -->
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane active" id="home">
-                                            <!--转正基本参数------------------------------------------------------------->
-                                            <div id="rotate-base-param" class="algorithm-param">
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Rotate Search Score</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="70">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Rotate Search Height</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="160">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Rotate Search width</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="120">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Rotate Distance Ratio</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="3">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--区域定位基本参数---------------------------------------------------------->
-                                            <div id="areaSearch-base-param" class="algorithm-param">
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Area Search Score</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="70">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Area Search Height</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="50">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Area Search Width</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="50">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Actual Flux Width</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="8">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">Area Search Allow Offset</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="5">
-                                                    </div>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="Area-Search-radio" value="option1" checked>
-                                                        Save Search Failure Picture
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="Area-Search-radio" value="option1" checked>
-                                                        If Open Area Search
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="Area-Search-radio" value="option1" checked>
-                                                        If Ctrl Area Search Width
-                                                    </label>
-                                                </div>
-
-                                            </div>
-                                            <!--比对基本参数------------------------------------------------------------->
-                                            <div id="compare-base-param" class="algorithm-param">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="background" value="option1">
-                                                        是否是背景层的检测对象
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="frontGround" value="option1">
-                                                        是否允许前景侵入
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">检测对象张数</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="20">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">允许blobs可疑点面积总和</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="15000">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">生成阈值图时上浮值</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="2">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">生成阈值图时下浮值</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="2">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">边缘放宽像素数</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="1">
-                                                    </div>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="scatter" value="option1">
-                                                        是否允许散点检测
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">亮度最小面积</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="5">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">亮度最大面积</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="30">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">亮度最小能量</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="50">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">亮度最小个数</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="25">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">亮度-散点-缺陷名称</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="白色散点">
-                                                    </div>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="dark-figure" value="option1">
-                                                        暗图-是否检测散点缺陷
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">暗图最小面积</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="6">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">暗图最大面积</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="31">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">暗图最小能量</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="白色散点">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">暗图最小个数</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="26">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">暗图-散点-缺陷名称</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="黑色散点">
-                                                    </div>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="bright-figure-block" value="option1">
-                                                        亮图-是否检测块缺陷
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <!--条码基本参数------------------------------------------------------------->
-                                            <div id="barcode-base-param" class="algorithm-param">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" value="option1" checked>
-                                                        是否保存缺陷小图
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" value="option1" checked>
-                                                        是否进行条码识读
-                                                    </label>
-                                                </div>
-                                                <div class="radio" style="padding-bottom: 7px">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" value="option1" checked>
-                                                        是否进行条码缺陷检测
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">条码类型</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>Code 128</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">条码元素最大尺寸</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="50">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">白空区域提取阈值</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="40">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">黑条区域提取阈值</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="40">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--字符基本参数------------------------------------------------------------->
-                                            <div id="character-base-param" class="algorithm-param">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="save-defect-map" value="option1" checked>
-                                                        是否保存缺陷小图
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">字符极性</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>0</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">字符主方向</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>0</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">是否点阵字符</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>0</option>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="save-defect-map" value="option1" checked>
-                                                        是否进行小方向校正
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="save-defect-map" value="option1" checked>
-                                                        是否进行倾斜校正
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="save-defect-map" value="option1" checked>
-                                                        是否粘连字体
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">字符行数</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="1">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">是否采用自动二值化</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--二维码基本参数------------------------------------------------------------->
-                                            <div id="qrcode-base-param" class="algorithm-param">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" value="option1" checked>
-                                                        是否保存缺陷小图
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">二维码解码力度</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">二维码横向宽度</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="10">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">二维码类型</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>QR Code</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">QR码版本</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="4">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">超解码时间</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="10">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">是否镜像处理</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>yes</option>
-                                                            <option>no</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">最小对比度</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="30">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">最小模块尺寸</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="0">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">最大模块尺寸</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="0">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--低对比度检测基本参数------------------------------------------------------>
-                                            <div id="lowContrast-base-param" class="algorithm-param">
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">是否采用高斯方法检测</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>yes</option>
-                                                            <option>no</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">分割阈值</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="0.03">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">缺陷连接范围</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="6">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">是否检测亮缺陷</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>yes</option>
-                                                            <option>no</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">亮缺陷面积阈值</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="150">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">是否检测暗缺陷</label>
-                                                    <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>yes</option>
-                                                            <option>no</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">暗缺陷面积阈值</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="150">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">图像增量乘数</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="10">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">图像增量减数</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="150">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--偏位检测基本参数------------------------------------------------------>
-                                            <div id="offset-base-param" class="algorithm-param">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" value="option1" checked>
-                                                        是否开启水平方向偏位检测
-                                                    </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" value="option1" checked>
-                                                        是否开启竖直方向偏位检测
-                                                    </label>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-6 control-label">与模板图像的偏位误差</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="text" class="form-control" value="50">
-                                                    </div>
-                                                </div>
-                                            </div>
+                <div class="col-md-3 nestCol" id="right-content">
+                    <div class="nest-section">
+                        <!--面板-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">对象#1</h3>
+                            </div>
+                            <div class="panel-body" style="padding: 5px">
+                                <form class="form-horizontal nest-small-form">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <select class="form-control" id="algorithm-select">
+                                                <option value="rotate">转正</option>
+                                                <option value="area-search">区域定位</option>
+                                                <option value="compare">比对检测</option>
+                                                <option value="barcode">条码检测</option>
+                                                <option value="character">字符检测</option>
+                                                <option value="qrcode">二维码识读</option>
+                                                <option value="lowContrast">低对比度检测</option>
+                                                <option value="offset">偏位检测</option>
+                                            </select>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane" id="profile">
-                                            <div id="rotate-hg-param" class="algorithm-param">转正高级参数</div>
-                                            <div id="barcode-hg-param" class="algorithm-param">条码高级参数</div>
+                                    </div>
+                                    <div class="form-group algorithm-param" id="area-location">
+                                        <label class="col-sm-4 control-label">区域定位</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane" id="messages">...</div>
-                                        <div role="tabpanel" class="tab-pane" id="settings">...</div>
                                     </div>
 
-                                </div>
+                                    <div class="nest-small-tab">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本参数</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">高级参数</a></li>
+                                            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">仿真参数</a></li>
+                                            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">仿真</a></li>
+                                        </ul>
 
-                            </form>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="home">
+                                                <!--转正基本参数------------------------------------------------------------->
+                                                <div id="rotate-base-param" class="algorithm-param">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Rotate Search Score</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="70">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Rotate Search Height</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="160">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Rotate Search width</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="120">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Rotate Distance Ratio</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="3">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--区域定位基本参数---------------------------------------------------------->
+                                                <div id="areaSearch-base-param" class="algorithm-param">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Area Search Score</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="70">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Area Search Height</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="50">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Area Search Width</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="50">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Actual Flux Width</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="8">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">Area Search Allow Offset</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="5">
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="Area-Search-radio" value="option1" checked>
+                                                            Save Search Failure Picture
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="Area-Search-radio" value="option1" checked>
+                                                            If Open Area Search
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="Area-Search-radio" value="option1" checked>
+                                                            If Ctrl Area Search Width
+                                                        </label>
+                                                    </div>
 
+                                                </div>
+                                                <!--比对基本参数------------------------------------------------------------->
+                                                <div id="compare-base-param" class="algorithm-param">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="background" value="option1">
+                                                            是否是背景层的检测对象
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="frontGround" value="option1">
+                                                            是否允许前景侵入
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">检测对象张数</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="20">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">允许blobs可疑点面积总和</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="15000">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">生成阈值图时上浮值</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">生成阈值图时下浮值</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">边缘放宽像素数</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="scatter" value="option1">
+                                                            是否允许散点检测
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">亮度最小面积</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="5">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">亮度最大面积</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="30">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">亮度最小能量</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="50">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">亮度最小个数</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="25">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">亮度-散点-缺陷名称</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="白色散点">
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="dark-figure" value="option1">
+                                                            暗图-是否检测散点缺陷
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">暗图最小面积</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="6">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">暗图最大面积</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="31">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">暗图最小能量</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="白色散点">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">暗图最小个数</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="26">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">暗图-散点-缺陷名称</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="黑色散点">
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="bright-figure-block" value="option1">
+                                                            亮图-是否检测块缺陷
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <!--条码基本参数------------------------------------------------------------->
+                                                <div id="barcode-base-param" class="algorithm-param">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" value="option1" checked>
+                                                            是否保存缺陷小图
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" value="option1" checked>
+                                                            是否进行条码识读
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio" style="padding-bottom: 7px">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" value="option1" checked>
+                                                            是否进行条码缺陷检测
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">条码类型</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>Code 128</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">条码元素最大尺寸</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="50">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">白空区域提取阈值</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="40">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">黑条区域提取阈值</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="40">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--字符基本参数------------------------------------------------------------->
+                                                <div id="character-base-param" class="algorithm-param">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="save-defect-map" value="option1" checked>
+                                                            是否保存缺陷小图
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">字符极性</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>0</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">字符主方向</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>0</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">是否点阵字符</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>0</option>
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="save-defect-map" value="option1" checked>
+                                                            是否进行小方向校正
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="save-defect-map" value="option1" checked>
+                                                            是否进行倾斜校正
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="save-defect-map" value="option1" checked>
+                                                            是否粘连字体
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">字符行数</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">是否采用自动二值化</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--二维码基本参数------------------------------------------------------------->
+                                                <div id="qrcode-base-param" class="algorithm-param">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" value="option1" checked>
+                                                            是否保存缺陷小图
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">二维码解码力度</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">二维码横向宽度</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="10">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">二维码类型</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>QR Code</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">QR码版本</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="4">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">超解码时间</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="10">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">是否镜像处理</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>yes</option>
+                                                                <option>no</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">最小对比度</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="30">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">最小模块尺寸</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="0">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">最大模块尺寸</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="0">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--低对比度检测基本参数------------------------------------------------------>
+                                                <div id="lowContrast-base-param" class="algorithm-param">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">是否采用高斯方法检测</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>yes</option>
+                                                                <option>no</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">分割阈值</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="0.03">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">缺陷连接范围</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="6">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">是否检测亮缺陷</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>yes</option>
+                                                                <option>no</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">亮缺陷面积阈值</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="150">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">是否检测暗缺陷</label>
+                                                        <div class="col-sm-6">
+                                                            <select class="form-control">
+                                                                <option>yes</option>
+                                                                <option>no</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">暗缺陷面积阈值</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="150">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">图像增量乘数</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="10">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">图像增量减数</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="150">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--偏位检测基本参数------------------------------------------------------>
+                                                <div id="offset-base-param" class="algorithm-param">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" value="option1" checked>
+                                                            是否开启水平方向偏位检测
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" value="option1" checked>
+                                                            是否开启竖直方向偏位检测
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 control-label">与模板图像的偏位误差</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" value="50">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="profile">
+                                                <div id="rotate-hg-param" class="algorithm-param">转正高级参数</div>
+                                                <div id="barcode-hg-param" class="algorithm-param">条码高级参数</div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                                            <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
                         </div>
                     </div>
 
@@ -891,13 +907,15 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-default navbar-fixed-bottom nestStepChangeBar">
-        <div class="container-fluid">
-            <div class="navbar-form">
-                <button class="btn btn-default nestStepChangeBarLeftButton" id="prevStep"><i class="fa fa-chevron-left"></i> 上一步</button>
-                <button class="btn btn-default nestStepChangeBarRightButton" id="nextStep">完成 <i class="fa fa-circle-o"></i></button>
+    <div class="nest-footer">
+        <nav class="navbar navbar-default nestStepChangeBar">
+            <div class="container-fluid">
+                <div class="navbar-form">
+                    <button class="btn btn-default nestStepChangeBarLeftButton" id="prevStep"><i class="fa fa-chevron-left"></i> 上一步</button>
+                    <button class="btn btn-default nestStepChangeBarRightButton" id="nextStep">完成 <i class="fa fa-circle-o"></i></button>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 </body>
 </html>

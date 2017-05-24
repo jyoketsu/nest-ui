@@ -14,15 +14,20 @@
     <script src="https://cdn.bootcss.com/jquery-validate/1.15.1/localization/messages_zh.js"></script>
     <!--jquery.mockjax-->
     <script src="https://cdn.bootcss.com/jquery-mockjax/1.6.2/jquery.mockjax.js"></script>
-    <!-- 引入自定义 -->
+    <!-- nest样式 -->
     <link rel="stylesheet" href="../../standard/css/nest.css">
-    <script src="../../js/nest/main.js"></script>
+    <script src="../../standard/js/nest.js"></script>
 
     <script>
         $(document).ready(function(){
             // 单击退出按钮
             $("#quit").on("click",function(){
-                window.location.href = "../product-detect/product-detect.html";
+                var prePage = sessionStorage.getItem("prePage")
+                if(prePage == "product-info"){
+                    window.location.href = "../product-info/product-info.html";
+                } else if (prePage == "product-detect"){
+                    window.location.href = "../product-detect/product-detect.html";
+                }
             });
             // 使上一步无效
             $("#prevStep").attr("disabled",true);
@@ -86,58 +91,61 @@
     </script>
 </head>
 <body>
-    <!-- tab菜单 -->
-    <div class="nestTabMenu nest-tab-navbar">
-        <ul class="nav nav-tabs" role="tablist">
-            <li>
-                <a href="#" class="nest-logo">
-                    <img alt="Brand" src="../../standard/image/focusight.png">
-                </a>
-            </li>
-            <li role="presentation" class="active"><a href="#system" aria-controls="station1" role="tab" data-toggle="tab"><i class="fa fa-gears" aria-hidden="true"></i> 系统</a></li>
-        </ul>
-        <!-- 标签面板 -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="system">
-                <!-- tab菜单导航条 -->
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#"></a>
-                        </div>
+    <div class="nest-head">
+        <!-- tab菜单 -->
+        <div class="nestTabMenu nest-tab-navbar">
+            <ul class="nav nav-tabs" role="tablist">
+                <li>
+                    <a href="#" class="nest-logo">
+                        <img alt="Brand" src="../../standard/image/focusight.png">
+                    </a>
+                </li>
+                <li role="presentation" class="active"><a href="#system" aria-controls="station1" role="tab" data-toggle="tab"><i class="fa fa-gears" aria-hidden="true"></i> 系统</a></li>
+            </ul>
+            <!-- 标签面板 -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="system">
+                    <!-- tab菜单导航条 -->
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#"></a>
+                            </div>
 
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#" class="nest-nav-label">操作</a></li>
-                                <li><a href="#"><i class="fa fa-save" aria-hidden="true"></i> 保存</a></li>
-                                <li><a href="#"><i class="fa fa-clone" aria-hidden="true"></i> 另存为</a></li>
-                                <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除模板</a></li>
-                                <li><a href="#" id="quit"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</a></li>
-                            </ul>
-                        </div>
-                    </div><!-- /.container-fluid -->
-                </nav>
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="#" class="nest-nav-label">操作</a></li>
+                                    <li><a href="#"><i class="fa fa-save" aria-hidden="true"></i> 保存</a></li>
+                                    <li><a href="#"><i class="fa fa-clone" aria-hidden="true"></i> 另存为</a></li>
+                                    <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> 删除模板</a></li>
+                                    <li><a href="#" id="quit"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</a></li>
+                                </ul>
+                            </div>
+                        </div><!-- /.container-fluid -->
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
 
+
     <!--主体内容-->
-    <div style="position: fixed; top: 100px;left: 0;right: 0;bottom: 50px;">
-        <div class="container-fluid" style="height: 100%">
-            <div class="row" style="height: 100%">
-                <div class="col-md-6" style="height: 100%">
+    <div class="nest-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 nestCol">
                     <!--缩略图-->
                     <a href="#" class="thumbnail vetically-child" style="width: 300px;height: 300px;">
                         <img src="../../standard/image/sample.png" alt="..." style="width: 100%;">
                     </a>
                 </div>
-                <div class="col-md-6" style="height: 100%">
+                <div class="col-md-6 nestCol">
                     <!--模板信息表单-->
                     <form style="width: 80%;height: 80%" class="vetically-child" id="productInfoForm">
                         <div class="form-group">

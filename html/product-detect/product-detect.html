@@ -17,9 +17,9 @@
   <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
 
-  <!-- 自定义 -->
+  <!-- nest样式 -->
   <link rel="stylesheet" href="../../standard/css/nest.css">
-  <script src="../../js/nest/main.js"></script>
+  <script src="../../standard/js/nest.js"></script>
 
   <style>
     .nest-slider {
@@ -45,10 +45,11 @@
     $(document).ready(function(){
       // 导航关闭按钮
       $("#exit").on("click",function(){
-        window.location.href = "../home/nest-home.html";
+        window.location.href = "../product-info/product-info.html";
       });
       // 新建模板
       $("#newModel,#editModel,#newModel-nav,#editModel-nav").on("click",function(){
+        sessionStorage.setItem("prePage", "product-detect");
         window.location.href = "../build-model/build-model-step1.html";
       });
       $("#logout").on("click",function(){
@@ -85,218 +86,222 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-default nestToolbar-blue">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Focusight</a>
+  <div class="nest-head">
+    <nav class="navbar navbar-default nestToolbar-blue">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Focusight</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="toolbar">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">模板 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" id="newModel-nav">新建模板</a></li>
+                <li><a href="#" id="editModel-nav">编辑模板</a></li>
+                <li><a href="#" id="modelManage" data-toggle="modal" data-target="#modelManage-modal">模板管理</a></li>
+                <li><a href="#" id="loadModel-nav" data-toggle="modal" data-target="#modelManage-modal">加载模板</a></li>
+                <li><a href="#" id="closeModel-nav" data-toggle="modal" data-target="#closeModalAlert">关闭模板</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">操作 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">开始检测</a></li>
+                <li><a href="#">新建一车</a></li>
+                <li><a href="#">加载车次</a></li>
+                <li><a href="#">动态学习</a></li>
+                <li><a href="#">条码文件导入</a></li>
+                <li><a href="#">数据统计</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">视图 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><input type="checkbox" checked> 工具栏</a></li>
+                <li><a href="#"><input type="checkbox" checked> 缺陷小图</a></a></li>
+                <li><a href="#"><input type="checkbox" checked> 缺陷列表</a></a></li>
+                <li><a href="#"><input type="radio" name="optionsRadios"> 模板图</a></a></li>
+                <li><a href="#"><input type="radio" name="optionsRadios"> 实时转正图</a></a></li>
+                <li><a href="#"><input type="radio" name="optionsRadios"> 实时图</a></a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">系统参数</a></li>
+                <li><a href="#">工位设置</a></li>
+                <li><a href="#">控制设置</a></li>
+                <li><a href="#">硬件设置</a></li>
+                <li><a href="#">硬件测试</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>admin<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" id="logout">用户退出</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#userManage-modal">用户管理</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">帮助 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">关于SheetFocus...</a></li>
+              </ul>
+            </li>
+            <li><a href="#" id="exit">关闭</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <nav class="navbar navbar-default nestHotKey">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="hotKey">
+          <ul class="nav navbar-nav">
+            <button type="button" class="btn btn-success navbar-btn btnTooltip" id="newModel" title="新建模板"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-success navbar-btn btnTooltip" id="loadModel" title="加载模板" data-toggle="modal" data-target="#modelManage-modal"><i class="fa fa-rotate-right fa-2x" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-success navbar-btn btnTooltip" id="editModel" title="编辑模板"><i class="fa fa-edit fa-2x" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-danger navbar-btn btnTooltip" id="closeModel" title="关闭模板" data-toggle="modal" data-target="#closeModalAlert"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="startDetect" title="开始检测"><i class="fa fa-play-circle fa-2x" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="newTrip" title="新建一车"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="loadTrip" title="加载车次"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></button>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li role="presentation" style="margin-top: 8px;"><a href="#" style="width: 200px;height: 40px;margin-left: 10px; background: url(../../standard/image/focusight.png) no-repeat;background-size: contain"></a></li>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
       </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="toolbar">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">模板 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#" id="newModel-nav">新建模板</a></li>
-              <li><a href="#" id="editModel-nav">编辑模板</a></li>
-              <li><a href="#" id="modelManage" data-toggle="modal" data-target="#modelManage-modal">模板管理</a></li>
-              <li><a href="#" id="loadModel-nav" data-toggle="modal" data-target="#modelManage-modal">加载模板</a></li>
-              <li><a href="#" id="closeModel-nav" data-toggle="modal" data-target="#closeModalAlert">关闭模板</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">操作 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">开始检测</a></li>
-              <li><a href="#">新建一车</a></li>
-              <li><a href="#">加载车次</a></li>
-              <li><a href="#">动态学习</a></li>
-              <li><a href="#">条码文件导入</a></li>
-              <li><a href="#">数据统计</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">视图 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#"><input type="checkbox" checked> 工具栏</a></li>
-              <li><a href="#"><input type="checkbox" checked> 缺陷小图</a></a></li>
-              <li><a href="#"><input type="checkbox" checked> 缺陷列表</a></a></li>
-              <li><a href="#"><input type="radio" name="optionsRadios"> 模板图</a></a></li>
-              <li><a href="#"><input type="radio" name="optionsRadios"> 实时转正图</a></a></li>
-              <li><a href="#"><input type="radio" name="optionsRadios"> 实时图</a></a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">系统设置 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">系统参数</a></li>
-              <li><a href="#">工位设置</a></li>
-              <li><a href="#">控制设置</a></li>
-              <li><a href="#">硬件设置</a></li>
-              <li><a href="#">硬件测试</a></li>
-            </ul>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>admin<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#" id="logout">用户退出</a></li>
-              <li><a href="#" data-toggle="modal" data-target="#userManage-modal">用户管理</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">帮助 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">关于SheetFocus...</a></li>
-            </ul>
-          </li>
-          <li><a href="#" id="exit">关闭</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <nav class="navbar navbar-default nestHotKey">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="hotKey">
-        <ul class="nav navbar-nav">
-          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="newModel" title="新建模板"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="loadModel" title="加载模板" data-toggle="modal" data-target="#modelManage-modal"><i class="fa fa-rotate-right fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-success navbar-btn btnTooltip" id="editModel" title="编辑模板"><i class="fa fa-edit fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-danger navbar-btn btnTooltip" id="closeModel" title="关闭模板" data-toggle="modal" data-target="#closeModalAlert"><i class="fa fa-times fa-2x" aria-hidden="true"></i></button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="startDetect" title="开始检测"><i class="fa fa-play-circle fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="newTrip" title="新建一车"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></button>
-          <button type="button" class="btn btn-primary navbar-btn btnTooltip" id="loadTrip" title="加载车次"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></button>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li role="presentation" style="margin-top: 8px;"><a href="#" style="width: 200px;height: 40px;margin-left: 10px; background: url(../../standard/image/focusight.png) no-repeat;background-size: contain"></a></li>
-        </ul>
-
-      </div><!-- /.navbar-collapse -->
-    </div>
-  </nav>
+    </nav>
+  </div>
 
   <div class="nest-content">
-    <div class="container-fluid" style="position: relative; height: 100%;">
-      <div class="row" style="height: 100%">
-        <div class="col-md-8 nestCol" style="height: 100%">
-          <div style="height: 60%;">
-            <!-- 工位 标签页 -->
-            <div class="nestTab" style="height: 100%">
-              <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#station1" aria-controls="station1" role="tab" data-toggle="tab">工位1</a></li>
-                <li role="presentation"><a href="#station2" aria-controls="station2" role="tab" data-toggle="tab">工位2</a></li>
-              </ul>
-              <!-- 标签面板 -->
-              <div class="tab-content nestTabContent">
-                <div role="tabpanel" class="tab-pane fade in active" id="station1">
-                  <div style="background-color: #0f0f0f;height: 100%">
-                    <p style="color: white">工位1 绘图组件</p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 nestCol">
+          <div class="nest-section">
+            <div style="height: 60%;">
+              <!-- 工位 标签页 -->
+              <div class="nestTab" style="height: 100%">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#station1" aria-controls="station1" role="tab" data-toggle="tab">工位1</a></li>
+                  <li role="presentation"><a href="#station2" aria-controls="station2" role="tab" data-toggle="tab">工位2</a></li>
+                </ul>
+                <!-- 标签面板 -->
+                <div class="tab-content nestTabContent">
+                  <div role="tabpanel" class="tab-pane fade in active" id="station1">
+                    <div style="background-color: #0f0f0f;height: 100%">
+                      <p style="color: white">工位1 绘图组件</p>
+                    </div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade" id="station2">
+                    <div style="background-color: #0f0f0f;height: 100%">
+                      <p style="color: white">工位2 绘图组件</p>
+                    </div>
                   </div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="station2">
-                  <div style="background-color: #0f0f0f;height: 100%">
-                    <p style="color: white">工位2 绘图组件</p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- 标签页 结束 -->
-          </div>
-          <!-- 小图列表 -->
-          <div id = "thumbnailList" style="height: 40%;">
-            <div class="nestContainer" id="thumbnailContainer" style="background-color: #00b4ef">
-              <div class="nestThumbnail" style="height: 100%;background-color: #808080"><p style="color: white">图片列表组件</p></div>
+              </div><!-- 标签页 结束 -->
             </div>
-            <div class="nest-slider" id="slider"></div>
+            <!-- 小图列表 -->
+            <div id = "thumbnailList" style="height: 40%;">
+              <div id="thumbnailContainer" style="background-color: #00b4ef">
+                <div class="nestThumbnail" style="height: 100%;background-color: #808080"><p style="color: white">图片列表组件</p></div>
+              </div>
+              <div class="nest-slider" id="slider"></div>
+            </div>
           </div>
+
         </div>
-        <div class="col-md-4 nestCol" style="height: 100%">
-          <div style="height: 30%;">
-            <div style="text-align: center;height: 95%;background-color: white" class="radiusBorder vetically-parent"><p class="vetically-child" style="height: 30px;font-size: large;font-weight: bolder;color: #00b4ef" id="detect-info">用户已登录</p></div>
-          </div>
-          <div style="height: 70%;">
+        <div class="col-md-4 nestCol">
+          <div class="nest-section">
+            <div style="height: 30%;">
+              <div style="text-align: center;height: 95%;background-color: white" class="radiusBorder vetically-parent"><p class="vetically-child" style="height: 30px;font-size: large;font-weight: bolder;color: #00b4ef" id="detect-info">用户已登录</p></div>
+            </div>
+            <div style="height: 70%;">
 
-            <table data-toggle="table" data-height="300">
-              <thead>
-              <tr>
-                <th>相机</th>
-                <th>序号</th>
-                <th>类型</th>
-                <th>小图序号</th>
-                <th>张数</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>相机1</td>
-                <td>1</td>
-                <td>条形码</td>
-                <td>22</td>
-                <td>1</td>
-              </tr>
-              </tbody>
-            </table>
-
-
-
+              <table data-toggle="table" data-height="300">
+                <thead>
+                <tr>
+                  <th>相机</th>
+                  <th>序号</th>
+                  <th>类型</th>
+                  <th>小图序号</th>
+                  <th>张数</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>相机1</td>
+                  <td>1</td>
+                  <td>条形码</td>
+                  <td>22</td>
+                  <td>1</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -304,36 +309,38 @@
 
   </div>
 
-  <nav class="navbar navbar-default navbar-fixed-bottom nestStatusBar">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse">
-        <form class="navbar-form navbar-left">
-          <div class="form-group">
-            <label class="navbar-default">长期统计：</label>
-            <label class="navbar-default">已检总数</label>
-            <input type="text" class="form-control" readonly>
-            <label class="navbar-default">好品总数</label>
-            <input type="text" class="form-control" readonly>
-            <label class="navbar-default">坏品总数</label>
-            <input type="text" class="form-control" readonly>
-            <label class="navbar-default">坏品比例</label>
-            <input type="text" class="form-control" readonly>
-            <label class="navbar-default">拒检总数</label>
-            <input type="text" class="form-control" readonly>
-            <label class="navbar-default">检测速度</label>
-            <input type="text" class="form-control" readonly>
-          </div>
-        </form>
-        <form class="navbar-form navbar-right">
-          <div class="form-group">
-            <span class="label label-success">系统</span>
-            <span class="label label-success">工位1</span>
-            <span class="label label-success">工位2</span>
-          </div>
-        </form>
-      </div><!-- /.navbar-collapse -->
-    </div>
-  </nav>
+  <div class="nest-footer">
+    <nav class="navbar navbar-default nestStatusBar">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <label class="navbar-default">长期统计：</label>
+              <label class="navbar-default">已检总数</label>
+              <input type="text" class="form-control" readonly>
+              <label class="navbar-default">好品总数</label>
+              <input type="text" class="form-control" readonly>
+              <label class="navbar-default">坏品总数</label>
+              <input type="text" class="form-control" readonly>
+              <label class="navbar-default">坏品比例</label>
+              <input type="text" class="form-control" readonly>
+              <label class="navbar-default">拒检总数</label>
+              <input type="text" class="form-control" readonly>
+              <label class="navbar-default">检测速度</label>
+              <input type="text" class="form-control" readonly>
+            </div>
+          </form>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <span class="label label-success">系统</span>
+              <span class="label label-success">工位1</span>
+              <span class="label label-success">工位2</span>
+            </div>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+  </div>
 
   <!--模态框-->
   <!--模板管理-->
