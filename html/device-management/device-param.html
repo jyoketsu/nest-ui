@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>设备管理-设备参数</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <!-- awesome图标 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <!-- jquery-ui -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.css">
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
+    <!-- bootstrap-table -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css">
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- nest样式 -->
+    <link rel="stylesheet" href="../../standard/css/nest.css">
+    <script src="../../standard/js/nest.js"></script>
+
+    <script>
+
+        $(document).ready(function(){
+            $("#logout").on("click",function(){
+                window.location.href = "../../index.html";
+            });
+
+            $("#exit").on("click",function(){
+                window.location.href = "./device-info.html";
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="nest-head">
+    <nav class="navbar navbar-default nestToolbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand nest-logo" href="#">
+                    <img alt="Brand" src="../../standard/image/focusight-logo.png">
+                </a>
+                <a class="navbar-brand" href="#">设备参数</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="toolbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" id="logout">用户退出</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">语言 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><input type="radio" name="optionsRadios" checked> 简体中文</a></a></li>
+                            <li><a href="#"><input type="radio" name="optionsRadios"> English</a></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" id="exit">关闭</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+
+<div class="nest-content">
+    <div class="container"></div>
+</div>
+
+</body>
+</html>

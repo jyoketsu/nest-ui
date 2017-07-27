@@ -152,6 +152,7 @@ h4.nest-large-font,.nest-large-font{
 
 .nestToolbar{
     margin-bottom: 10px;
+    border-radius: 0;
     box-shadow: 0 1px 8px rgba(0,0,0,.175);
 }
 
@@ -168,6 +169,7 @@ h4.nest-large-font,.nest-large-font{
 .nestToolbar-blue{
     margin-bottom: auto;
     background-color: #438eb9;
+    border-radius: 0;
     box-shadow: 0 1px 8px rgba(0,0,0,.175);
 }
 .nestToolbar-blue a{
@@ -187,6 +189,7 @@ h4.nest-large-font,.nest-large-font{
 /*快捷按钮导航*/
 .nestHotKey{
     margin-bottom: 10px;
+    border-radius: 0;
     box-shadow: 0 1px 8px rgba(0,0,0,.175);
 }
 

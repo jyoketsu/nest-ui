@@ -41,6 +41,9 @@
       $("#product-manage").on("click",function(){
         window.location.href = "../product-info/product-info.html";
       });
+      $("#device-manage").on("click",function(){
+        window.location.href = "../device-management/device-info.html";
+      });
       /*模块路由事件结束*/
     });
   </script>
@@ -154,6 +157,18 @@
             </div>
 
             <div class="list-group">
+              <a href="#" class="list-group-item" id="device-manage">
+                <div class="row">
+                  <div class="col-md-3">
+                    <h4 class="nest-large-font">设备管理</h4>
+                  </div>
+                  <div class="col-md-9 hidden-xs">
+                    <p class="module-description">实现对设备信息的维护，包括导入设备信息文件，或者手动录入设备信息，枚举所有设备，设备状态的查询。</p>
+                  </div>
+                  <div class="module-extra-info col-md-9 col-md-offset-3 col-xs-12">
+                  </div>
+                </div>
+              </a>
               <a href="#" class="list-group-item" id="product-manage">
                 <div class="row">
                   <div class="col-md-3">
@@ -161,18 +176,6 @@
                   </div>
                   <div class="col-md-9 hidden-xs">
                     <p class="module-description">产品检测的核心工具，通过该工具，可枚举出所有产品，查看所有产品的状态。同时具备产品建模、产品检测等功能。</p>
-                  </div>
-                  <div class="module-extra-info col-md-9 col-md-offset-3 col-xs-12">
-                  </div>
-                </div>
-              </a>
-              <a href="#" class="list-group-item">
-                <div class="row">
-                  <div class="col-md-3">
-                    <h4 class="nest-large-font">业务模块</h4>
-                  </div>
-                  <div class="col-md-9 hidden-xs">
-                    <p class="module-description"></p>
                   </div>
                   <div class="module-extra-info col-md-9 col-md-offset-3 col-xs-12">
                   </div>
